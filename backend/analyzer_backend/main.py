@@ -1,7 +1,7 @@
 from fastapi import FastAPI, UploadFile, File
 import pdfplumber
 import docx
-import openai
+# import openai
 import io
 from google import genai
 from google.genai import types
@@ -9,6 +9,10 @@ import json
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
+from fastapi import HTTPException
+from pydantic import BaseModel
+import language_tool_python
+from spellchecker import SpellChecker
 
 # Load environment variables from .env file
 load_dotenv()
@@ -30,7 +34,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return {"message": "CORS enabled"}
+    return {"message": "CORS enableds"}
 
 # Set your OpenAI API key (replace 'your-api-key' with your actual key)
 
@@ -105,7 +109,7 @@ def analyze_resume_with_ai(text):
         print(f"- {suggestion}")
 
     
-    return {"score":score, "feedback":feedback, "suggestions":suggestions}
+    return resume_analysis
     # return response
 
 
@@ -124,7 +128,7 @@ def analyze_resume_with_ai(text):
 #     # )
 #     return response["choices"][0]["message"]["content"]
 
-@app.post("/upload-resume/")
+@app.post("/upload_resume/")
 async def upload_resume(file: UploadFile = File(...)):
     """Handles file upload and resume analysis"""
     file_extension = file.filename.split(".")[-1].lower()
@@ -144,3 +148,64 @@ async def upload_resume(file: UploadFile = File(...)):
     analysis_result = analyze_resume_with_ai(extracted_text)
 
     return {"filename": file.filename, "analysis": analysis_result}
+
+
+
+
+# Request model
+class TextInput(BaseModel):
+    text: str
+
+@app.post("/check_text/")
+async def check_text(input_text: TextInput):
+    try:
+        original_text = input_text.text
+
+        # Define a structured prompt
+        prompt = f"""
+        Please proofread the following text and return a structured JSON output:
+        
+        1. The fully corrected text.
+        2. A list of spelling mistakes with their corrections.
+        3. A list of grammar mistakes, their corrections, and suggested improvements.
+
+        Return the result in the following JSON format:
+
+        {{
+            "corrected_text": "fully corrected version",
+            "spelling_errors": [
+                {{"original": "misspelled_word", "corrected": "correct_word"}},
+                ...
+            ],
+            "grammar_errors": [
+                {{"original": "incorrect_sentence", "corrected": "fixed_sentence", "suggestion": "brief_explanation"}},
+                ...
+            ]
+        }}
+
+        """
+
+
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            config=types.GenerateContentConfig(
+                system_instruction=prompt),
+            contents=[original_text]
+        )
+        print(response)
+        
+
+        raw_text = response.candidates[0].content.parts[0].text
+
+        # Remove markdown code block (```json ... ```)
+        json_text = raw_text.strip("```json").strip("```").strip()
+
+        # Convert cleaned text into a dictionary
+        structured_response = json.loads(json_text)
+
+        print(structured_response)
+
+        return structured_response
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

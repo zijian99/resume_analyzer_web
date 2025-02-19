@@ -1,6 +1,6 @@
 conda create -n ra python=3.9
 conda activate ra
-pip install fastapi uvicorn python-multipart pdfplumber python-docx python-dotenv
+pip install fastapi uvicorn python-multipart pdfplumber python-docx python-dotenv language-tool-python pyspellchecker
 pip install -q -U google-genai
 
 /// add .env file and add GOOGLE_API_KEY=abcdefghijk
