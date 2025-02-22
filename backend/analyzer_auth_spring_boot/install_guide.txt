@@ -1,0 +1,17 @@
+Easy Way: Use IntellJ IDEA and Open the project
+Troublesome Way: Install Maven and setup environment variable in your laptop/desktop
+and open the project in VSCode and open the terminal and run 
+mvn clean install 
+mvn spring-boot:run
+
+Before running, make sure you add the below details to application.properties
+all of these are database setup
+
+spring.application.name=resume_analyzer
+spring.data.mongodb.uri=mongodb+srv://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@clusterzj.quap8.mongodb.net/?retryWrites=true&w=majority&appName=ClusterZJ
+spring.data.mongodb.database={DATABASE_NAME}
+
+# App Properties
+resume_analyzer.app.jwtCookieName= {YOUR_JWT_NAME,JSON_WEB_TOKEN=JWT}
+resume_analyzer.app.jwtSecret= {YOUR_JWT_KEY,AS LONG AS YOU REMEMBER}
+resume_analyzer.app.jwtExpirationMs= 86400000
