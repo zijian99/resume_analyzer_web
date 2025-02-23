@@ -8,7 +8,7 @@ Before running, make sure you add the below details to application.properties
 all of these are database setup
 
 spring.application.name=resume_analyzer
-spring.data.mongodb.uri=mongodb+srv://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@clusterzj.quap8.mongodb.net/?retryWrites=true&w=majority&appName=ClusterZJ
+spring.data.mongodb.uri=mongodb+srv://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@clusterzj.quap8.mongodb.net/{DATABASENAME_IFREQUIRED}?retryWrites=true&w=majority&appName=ClusterZJ
 spring.data.mongodb.database={DATABASE_NAME}
 
 # App Properties

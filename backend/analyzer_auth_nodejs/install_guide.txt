@@ -1,0 +1,10 @@
+npm install
+
+add .env file and add the following details
+MONGO_URI=mongodb+srv://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@clusterzj.quap8.mongodb.net/{DATABASENAME_IFREQUIRED}?retryWrites=true&w=majority&appName=ClusterZJ
+
+JWT_SECRET={YOUR JWT TOKEN SECRET KEY}
+PORT=8080{PORT TO HOST LOCALLY}
+
+
+node server.js
