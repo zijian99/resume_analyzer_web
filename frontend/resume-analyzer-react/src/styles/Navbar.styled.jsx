@@ -36,6 +36,7 @@ const NavbarWrapper = styled.nav`
     flex-direction: column;
     padding: 1rem;
   }
+  
 `;
 
 // const NavbarWrapper = styled.nav`

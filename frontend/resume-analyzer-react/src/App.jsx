@@ -18,13 +18,14 @@ function App() {
       <BrowserRouter>
         <GlobalStyles/>
           <Routes>
+          <Route path="/login" element={<Login />} />
             {/* element is to make that everything inside the<Route> has the <Layout> component */}
             <Route element={<Layout/>}> 
               {/* <Route path="/" element={<Navigate to="/dashboard" replace />} /> */}
               <Route path="/" element={<Landing />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
+              
               <Route path="/register" element={<Register />} />
               
             </Route>
