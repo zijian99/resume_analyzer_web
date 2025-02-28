@@ -22,7 +22,9 @@ const ClickableImg = styled(NavLink)`
 `;
 
 const NavbarWrapper = styled.nav`
-  position: sticky;
+  position: fixed;
+  width: 100vw;
+  box-sizing: border-box;
   top: 0;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   display: flex;

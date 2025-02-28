@@ -6,15 +6,16 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    // background-color:blue;
     
 }
 
 html {
-    overflow-y: scroll;
+    // overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
