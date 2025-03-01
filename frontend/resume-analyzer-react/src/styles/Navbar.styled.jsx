@@ -76,9 +76,10 @@ const StyledNavLink = styled(NavLink)`
     border-radius: 30px;
     &:hover {
       color: white;
+      opacity: 0.8;
     }
     &.${(props) => props.activeclassname} {
-      color: white;
+      color: blue;
     }
   }
 

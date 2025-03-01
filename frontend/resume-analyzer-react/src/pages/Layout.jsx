@@ -3,12 +3,15 @@ import Navbar from '../components/Navbar'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 
-const Layout = () => {
-  const Container = styled.div`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;
   `;
+
+
+const Layout = () => {
+  
 
   // const NavbarWrapper = styled.div`
   //   position: sticky;
