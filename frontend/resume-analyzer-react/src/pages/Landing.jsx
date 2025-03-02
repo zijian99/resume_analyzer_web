@@ -1,16 +1,22 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { GoArrowRight } from "react-icons/go";
 import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
-import gif1 from "../../src/assets/writing_expert.gif";
-import gif2 from "../../src/assets/gif2.gif";
-import gif3 from "../../src/assets/gif3.gif";
+import main_gif from "../../src/assets/writing_expert.gif";
+import cat_gif from "../../src/assets/cat_gif.gif";
+import randomgif from "../../src/assets/randomgif.gif";
+import content1 from "../../src/assets/content1.gif";
+import content2 from "../../src/assets/content2.gif";
+import content3 from "../../src/assets/content3.gif";
+import content5 from "../../src/assets/content5.gif";
+import LogoCarousel from "../components/LogoCarousel";
 
 const sections = [
-    { id: 1, text: "Content 1", image: gif1 },
-    { id: 2, text: "Content 2", image: gif2},
-    { id: 3, text: "Content 3", image: gif3 }
+    { id: 1, headertext: "Better writing, better results",smalltext:"Be perfectly professional, clear, and convincing in a few clicks, not a few hours.", image: content1 },
+    { id: 2, headertext: "The right text for the context",smalltext:"Get personalized suggestions based on what you're writing and who will read it.", image: content2},
+    { id: 3, headertext: "Works where you work",smalltext:"Works across all the apps and sites you use. No copying, no pasting, no context switching.", image: content3 },
+    { id: 4, headertext: "This is responsible AI",smalltext:"Don’t compromise on security. We never sell your data, provide it for advertising purposes, or allow third parties to use it to train their models.", image: cat_gif },
   ];
 
 // Styled Components
@@ -27,19 +33,22 @@ const LeftSection = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
+  // align-items: start;
+  // padding: 0.5em;
 `;
 
 const ContentBlock = styled.div`
   background: white;
-  padding: 20px;
+  // padding: 20px;
   border-radius: 10px;
-  min-height: 90vh;
+  min-height: 80vh;
   font-size: 18px;
   /* Center content both horizontally and vertically */
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
   justify-content: center;
-  text-align: center; /* Optional: Ensures text is also centered */
+  text-align: start; /* Optional: Ensures text is also centered */
   
 `;
 
@@ -52,7 +61,7 @@ const RightSection = styled.div`
   // height: 100vh; /* Ensure full page height */
   position: relative;
   padding: 1em;
-  background-color: grey;
+  // background-color: grey;
 `;
 
 const StickyImageWrapper = styled.div`
@@ -63,15 +72,17 @@ const StickyImageWrapper = styled.div`
   width: 100%;
   display: flex;
   align-self: start;
+  align-items:center;
+  justify-content: center;  
   margin-top: 10%;
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 60vh;
+  width: 90%;
+  height: 55vh;
   border-radius: 10px;
   opacity: ${(props) => (props.isFading ? 0 : 1)};
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const CardContainer = styled.div`
@@ -82,7 +93,7 @@ const CardContainer = styled.div`
   // min-height: 100vh; /* Each section takes full viewport height */
 
   // background-color: purple;
-  margin-bottom: 0.5em;
+  // margin-bottom: 0.5em;
   padding: 5em 5em;
 `;
 
@@ -164,30 +175,45 @@ const GetAccountText = styled.div`
 
 const Landing = () => {
 
-
-
-
   const [currentImage, setCurrentImage] = useState(sections[0].image);
 
-  const { ref: firstContainerRef, inView: firstIsInView } = useInView({ threshold: 0.6 });
-  const { ref: secondContainerRef, inView: secondIsInView } = useInView({ threshold: 0.6 });
-  const { ref: thirdContainerRef, inView: thirdIsInView } = useInView({ threshold: 0.6 });
+  const { ref: firstContainerRef, inView: firstIsInView } = useInView({ threshold: 0.8 });
+  const { ref: secondContainerRef, inView: secondIsInView } = useInView({ threshold: 0.8 });
+  const { ref: thirdContainerRef, inView: thirdIsInView } = useInView({ threshold: 0.8 });
 
   const [isFading, setIsFading] = useState(false);
   
+  const sectionRefs = useRef([]);
+
   useEffect(() => {
-    setIsFading(true); // Start fade-out
-    const timeout = setTimeout(() => {
-      setCurrentImage(
-        firstIsInView ? sections[0].image : 
-        secondIsInView ? sections[1].image : 
-        thirdIsInView ? sections[2].image : sections[0].image
-      );
-      setIsFading(false); // Fade-in new image
-    }, 1000); // Delay to match transition
-  
-    return () => clearTimeout(timeout);
-  }, [firstIsInView, secondIsInView, thirdIsInView]);
+    const handleScroll = () => {
+      let newImage = currentImage;
+      let found = false;
+
+      for (let i = 0; i < sectionRefs.current.length; i++) {
+        const section = sectionRefs.current[i];
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top >= 0 && rect.top <= window.innerHeight * 0.6) {
+            newImage = sections[i].image;
+            found = true;
+            break;
+          }
+        }
+      }
+
+      if (found && newImage !== currentImage) {
+        setIsFading(true);
+        setTimeout(() => {
+          setCurrentImage(newImage);
+          setIsFading(false);
+        }, 300);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [currentImage]);
 
   return (
     <Wrapper>
@@ -205,31 +231,37 @@ const Landing = () => {
             </HeaderContainer>
               
             <HeaderContainer>
-              <img src={gif1} alt="logo" />
+              <img src={main_gif} alt="logo" />
             </HeaderContainer>
         </CardContainer>
-    <CardContainer1>
-      <LeftSection>
-        <ContentBlock ref={firstContainerRef}>
-          <div>Content 11111111111111</div>
-          
-        </ContentBlock>
-        <ContentBlock ref={secondContainerRef}>
-          Content 2
-        </ContentBlock>
-        <ContentBlock ref={thirdContainerRef}>
-          Content 3
-        </ContentBlock>
-      </LeftSection>
 
-      <RightSection>
-        <StickyImageWrapper>
-          <Image src={currentImage} alt="Sticky" isFading={isFading} />
-        </StickyImageWrapper>
-      </RightSection>
-    </CardContainer1>
+        <LogoCarousel/>
 
-    <CardContainer>landing 3</CardContainer>
+
+        <CardContainer>
+        <LeftSection>
+          {sections.map((section, index) => (
+            <ContentBlock
+              key={section.id}
+              ref={(el) => (sectionRefs.current[index] = el)}
+            >
+              <HeaderText>{section.headertext}</HeaderText>
+              <SmallText>{section.smalltext}</SmallText>
+            </ContentBlock>
+          ))}
+        </LeftSection>
+
+        <RightSection>
+          <StickyImageWrapper>
+            <Image src={currentImage} alt="Sticky" isFading={isFading} />
+          </StickyImageWrapper>
+        </RightSection>
+      </CardContainer>
+
+    <CardContainer>
+      landing 3
+
+    </CardContainer>
 
     </Wrapper>
   );
