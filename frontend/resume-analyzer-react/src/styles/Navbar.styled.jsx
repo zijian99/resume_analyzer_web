@@ -73,7 +73,7 @@ const StyledNavLink = styled(NavLink)`
     background: #007dfc;
     color: white;
     padding: 0.5rem 1rem;
-    border-radius: 30px;
+    border-radius: 10px;
     &:hover {
       color: white;
       opacity: 0.8;

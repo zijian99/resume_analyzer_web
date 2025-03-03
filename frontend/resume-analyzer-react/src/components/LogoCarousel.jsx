@@ -123,7 +123,6 @@ const LogoCarousel = () => {
       </SliderContainer>
     <PauseButton onClick={() => setIsPaused(!isPaused)}>
     {isPaused ? <FaRegCirclePlay size={32} /> : <FaRegCirclePause size={32}  />}
-    
   </PauseButton>
   </CarouselContainer>
     

@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import GlobalStyles from './styles/Global.styled';
 import About from './pages/About';
+import ScrollToTop from './components/ScrolltoTop';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <GlobalStyles/>
+        <ScrollToTop/>
           <Routes>
           <Route path="/login" element={<Login />} />
             {/* element is to make that everything inside the<Route> has the <Layout> component */}

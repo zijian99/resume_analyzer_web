@@ -15,7 +15,7 @@ const Navbar = () => {
       href:"/about",
     },
     {
-      page:"Login",
+      page:"Login To Resume Analyzer",
       href:"/login",
     }
   ]

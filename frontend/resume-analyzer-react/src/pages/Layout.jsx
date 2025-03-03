@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
+import Footer from '../components/Footer';
 
 const Container = styled.div`
     display: flex;
@@ -29,6 +30,7 @@ const Layout = () => {
     <Container>
         <Navbar />
         <Outlet />
+        <Footer/>
     </Container>
   );
 };

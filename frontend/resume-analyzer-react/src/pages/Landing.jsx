@@ -11,6 +11,7 @@ import content2 from "../../src/assets/content2.gif";
 import content3 from "../../src/assets/content3.gif";
 import content5 from "../../src/assets/content5.gif";
 import LogoCarousel from "../components/LogoCarousel";
+import PricingPlan from "../components/PricingPlan";
 
 const sections = [
     { id: 1, headertext: "Better writing, better results",smalltext:"Be perfectly professional, clear, and convincing in a few clicks, not a few hours.", image: content1 },
@@ -172,6 +173,31 @@ const GetAccountText = styled.div`
   margin: 0 0.5em;
 `;
 
+const PricingContainer = styled.div`
+  display: flex;
+  // align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  // min-height: 100vh; /* Each section takes full viewport height */
+
+  // background-color: purple;
+  // margin-bottom: 0.5em;
+  margin: 10em 0;
+  // padding: 5em 5em;
+
+`;
+
+const PricingTitle = styled.div`
+  display: flex;
+  font-size: 3em;
+  font-weight: bold;
+  flex-direction: column;
+  text-align: center;
+  align-self: center;
+  // background-color:grey;
+  width: 100%;
+`;
+
 
 const Landing = () => {
 
@@ -221,7 +247,7 @@ const Landing = () => {
         <HeaderContainer>
               <HeaderText>Resume Analyzer that ensure your resume quality and writing shine </HeaderText>
               <SmallText>Work with AI that helps with your resume analysis and feedback, to get you to your desired jobs. </SmallText>
-              <GetAccountButton onClick={()=>{console.log("clicked")}}> 
+              <GetAccountButton to="/login"> 
                 <GetAccountBoldText>Get Your Account</GetAccountBoldText>
                 <GetAccountText>It's Free </GetAccountText>
                 <GoArrowRight/>
@@ -258,10 +284,34 @@ const Landing = () => {
         </RightSection>
       </CardContainer>
 
-    <CardContainer>
-      landing 3
+    <PricingContainer>
+      <PricingTitle>Choose the Right</PricingTitle>
+      <PricingTitle>Resume Analysis Plan</PricingTitle>
 
-    </CardContainer>
+      <PricingPlan/>
+    </PricingContainer>
+
+
+    <CardContainer>
+        <RightSection>
+          <div></div>
+          <Image src="src/assets/annual_report_example.jpg" alt=""  />
+        </RightSection>
+
+        <LeftSection>
+            <ContentBlock>
+              <HeaderText>The Productivity Shift</HeaderText>
+              <SmallText>AI-fluent power users are leading the way to reclaim the workweek. Learn from their habits and scale them across your enterprise to save millions in productivity gains.</SmallText>
+              {/* <GetAccountButton onClick={()=>{console.log("clicked")}}> 
+                <GetAccountBoldText>Get the Data</GetAccountBoldText>
+                <GoArrowRight/>
+              </GetAccountButton> */}
+            </ContentBlock>
+            
+        </LeftSection>
+      </CardContainer>
+
+
 
     </Wrapper>
   );
