@@ -11,7 +11,7 @@ export const BoxContainer = styled.div`
 
 export const FormContainer = styled.form`
   width: 100%;
-  background-color:green;
+  // background-color:green;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,16 +20,16 @@ export const FormContainer = styled.form`
 `;
 
 export const MutedLink = styled.a`
-  font-size: 11px;
-  color: rgba(200, 200, 200, 0.8);
+  font-size: 12px;
+  color: rgba(150, 150, 150, 0.8);
   font-weight: 500;
   text-decoration: none;
   margin: 2em 1em;
 `;
 
 export const BoldLink = styled.a`
-  font-size: 11px;
-  color: rgb(241, 196, 15);
+  font-size: 12px;
+  color: rgb(93, 47, 194);
   font-weight: 500;
   text-decoration: none;
   margin: 0 4px;
@@ -37,18 +37,18 @@ export const BoldLink = styled.a`
 
 export const Input = styled.input`
   width: 90%;
-  height: 42px;
+  height: 44px;
   outline: none;
-  border: 1px solid rgba(200, 200, 200, 0.3);
+  border: 0px solid rgba(200, 200, 200, 0.3);
   box-sizing: border-box;
   // padding: 2px 10px;
-  border-bottom: 1.4px solid transparent;
+  border-bottom: 1.5px solid rgba(200, 200, 200, 0.4);
   transition: all 200ms ease-in-out;
-  font-size: 12px;
+  font-size: 14px;
   margin: 1em 2em;
 
   &::placeholder {
-    color: rgba(200, 200, 200, 1);
+    color: rgb(150, 150, 150);
   }
 
   &:not(:last-of-type) {
@@ -57,7 +57,8 @@ export const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-bottom: 2px solid rgb(241, 196, 15);
+    //border-bottom: 2px solid rgb(241, 196, 15);
+    border-bottom: 2px solid rgb(93, 47, 194);
   }
 `;
 
@@ -72,14 +73,21 @@ export const SubmitButton = styled.button`
   cursor: pointer;
   transition: all, 240ms ease-in-out;
   margin: 2em 2em;
-  background: rgb(241, 196, 15);
+  // background: rgb(241, 196, 15);
+  // background: linear-gradient(
+  //   58deg,
+  //   rgba(241, 196, 15, 1) 20%,
+  //   rgba(243, 172, 18, 1) 100%
+  // );
+  background: rgb(93, 47, 194);
   background: linear-gradient(
     58deg,
-    rgba(241, 196, 15, 1) 20%,
-    rgba(243, 172, 18, 1) 100%
+    rgba(93, 47, 194, 1) 20%,
+    rgba(93, 27, 194, 1) 100%
   );
 
+
   &:hover {
-    filter: brightness(1.03);
+    opacity: 0.9;
   }
 `;

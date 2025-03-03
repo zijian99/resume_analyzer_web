@@ -12,11 +12,19 @@ const NavigateHomeButton = styled(NavLink)`
     text-decoration: none; /* Optional: Removes underline */
     white-space: nowrap; /* Prevents text wrapping */
     padding: 0.5em 1em; /* Gives spacing */
-    background-color: lightgray; /* Optional: Makes it visible */
+    // background-color: lightgray; /* Optional: Makes it visible */
     border-radius: 5px; /* Optional: Makes it look nicer */
     align-self: flex-start;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
+    color: white;
+    border: 2px solid white;
+    z-index: 10;
+
+    &:hover {
+    opacity: 0.8;
+  }
 `;
 const Span = styled.span`
   margin: 0 0.5em;
@@ -27,17 +35,18 @@ const Span = styled.span`
 
 const BoxContainer = styled.div`
   min-width: 50%;
-  min-height: 100vh;
+  min-height: 98vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 19px;
-  background-color: grey;
+  // background-color: grey;
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
-  // position: relative;
+  position: relative;
   padding: 2em 4em;
-  // overflow: hidden;
+  overflow: hidden;
+  margin: 0.5em;
 `;
 
 const TopContainer = styled.div`
@@ -54,20 +63,22 @@ const TopContainer = styled.div`
 `;
 
 const BackDrop = styled(motion.div)`
-  width: 160%;
-  height: 160%;
+  width: 120%;
+  height: 40%;
   position: absolute;
   display: flex;
   flex-direction: column;
-  border-radius: 50%;
-  transform: rotate(60deg);
-  top: -390px;
-  left: -570px;
-  background: rgb(241, 196, 15);
+  border-radius: 20%;
+  // transform: rotate(60deg);
+  top: -100px;
+  right: -80px;
+  // left: 2px;
+  // background: rgb(241, 196, 15);
+  background: rgba(93, 47, 194, 1);
   background: linear-gradient(
     58deg,
-    rgba(241, 196, 15, 1) 20%,
-    rgba(243, 172, 18, 1) 100%
+    rgba(93, 47, 194, 1) 20%,
+    rgba(93, 27, 194, 1) 100%
   );
 `;
 
@@ -78,23 +89,24 @@ const HeaderContainer = styled.div`
 `;
 
 const HeaderText = styled.h2`
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 600;
   line-height: 1.24;
   // color: #fff;
-  color:black;
+  // color:black;
+  color: white;
   z-index: 10;
   margin: 0;
 `;
 
 const SmallText = styled.h5`
   // color: #fff;
-  color:black;
-  font-weight: 500;
-  font-size: 11px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
   z-index: 10;
   margin: 0;
-  margin-top: 7px;
+  margin-top: 1.5em;
 `;
 
 const InnerContainer = styled.div`
@@ -111,14 +123,14 @@ const backdropVariants = {
   expanded: {
     width: "233%",
     height: "1050px",
-    borderRadius: "20%",
-    transform: "rotate(60deg)",
+    // borderRadius: "20%",
+    // transform: "rotate(60deg)",
   },
   collapsed: {
-    width: "160%",
-    height: "550px",
-    borderRadius: "50%",
-    transform: "rotate(60deg)",
+    width: "120%",
+    height: "40%",
+    // borderRadius: "50%",
+    // transform: "rotate(60deg)",
   },
 };
 
@@ -159,12 +171,13 @@ export function AccountBox(props) {
     <AccountContext.Provider value={contextValue}>
       <BoxContainer>
         <TopContainer>
-          {/* <BackDrop
+          <BackDrop
             initial={false}
             animate={isExpanded ? "expanded" : "collapsed"}
             variants={backdropVariants}
             transition={expandingTransition}
-          /> */}
+          />
+          {/* <BackDrop/> */}
           {active === "signin" && (
             <HeaderContainer>
               <HeaderText>Welcome</HeaderText>

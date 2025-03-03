@@ -154,7 +154,9 @@ const GetAccountButton = styled(NavLink)`
   transition: 0.2s;
   margin: 2em 0;
   padding: 2em 1em;
-  background: #007dfc;
+  // background: #007dfc;
+  // background: #3cc9b4;
+  background: #5f30e2;
   color: white;
   border-radius: 5px;
   &:hover {

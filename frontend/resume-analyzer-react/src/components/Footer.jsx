@@ -39,7 +39,8 @@ const FooterLink = styled.a`
   margin-bottom: 1em;
 
   &:hover {
-    color: #007bff;
+    // color: #007bff;
+    color: #5f30e2;
   }
 `;
 

@@ -67,10 +67,12 @@ const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   transition: 0.2s;
   color: black;
-  
+  font-weight: bold;
   margin-left: 2rem;
   &:last-child {
-    background: #007dfc;
+    //background: #007dfc;
+    // background: #3cc9b4;
+    background: #5f30e2;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 10px;
@@ -78,17 +80,21 @@ const StyledNavLink = styled(NavLink)`
       color: white;
       opacity: 0.8;
     }
-    &.${(props) => props.activeclassname} {
-      color: blue;
-    }
+    // &.${(props) => props.activeclassname} {
+    //   color: blue;
+    // }
   }
 
   &.${(props) => props.activeclassname} {
-    color: #007dfc;
+    // color: #007dfc;
+    // color: #3cc9b4;
+    color: #5f30e2;
   }
 
   &:hover {
-    color: #007dfc;
+    // color: #007dfc;
+    // color: #3cc9b4;
+    color: #5f30e2;
   }
 
   @media (max-width: 704px) {
