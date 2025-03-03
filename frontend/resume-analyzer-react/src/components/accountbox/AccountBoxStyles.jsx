@@ -37,7 +37,7 @@ export const BoldLink = styled.a`
 
 export const Input = styled.input`
   width: 90%;
-  height: 44px;
+  height: 35px;
   outline: none;
   border: 0px solid rgba(200, 200, 200, 0.3);
   box-sizing: border-box;

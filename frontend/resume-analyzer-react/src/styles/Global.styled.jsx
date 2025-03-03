@@ -5,7 +5,14 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    // font-family: 'Poppins', sans-serif;
+    // font-family: 'Courier New',sans-serif;
+    font-family: 'Lato',sans-serif;
+    // font-family: "Inter",sans-serif;
+    // font-optical-sizing: auto;
+    // font-weight: 100;
+    // font-style: normal;
+    
     // background-color:blue;
     
 }

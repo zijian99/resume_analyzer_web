@@ -15,6 +15,13 @@ const AppContainer = styled.div`
   justify-content: space-between;
 `;
 
+const LoginBackground = styled.img`
+  width: 100%;
+  height: 60vh;
+  align-items: center;
+  // display: flex;
+  // flex: 1;
+`;
 
 const Login = () => {
   
@@ -22,7 +29,7 @@ const Login = () => {
   return (
   <AppContainer>
       <div>
-        <img src="src\assets\pic.jpg" alt="" />
+        <LoginBackground src="src\assets\pic.jpg" alt="" />
       </div>
      <AccountBox/>
   </AppContainer>

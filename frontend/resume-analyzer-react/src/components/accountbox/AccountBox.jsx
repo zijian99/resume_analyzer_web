@@ -35,7 +35,8 @@ const Span = styled.span`
 
 const BoxContainer = styled.div`
   min-width: 50%;
-  min-height: 98vh;
+  min-height: 90vh;
+  height: 90vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -70,7 +71,7 @@ const BackDrop = styled(motion.div)`
   flex-direction: column;
   border-radius: 20%;
   // transform: rotate(60deg);
-  top: -100px;
+  top: -80px;
   right: -80px;
   // left: 2px;
   // background: rgb(241, 196, 15);
