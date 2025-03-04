@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { AccountBox } from '../components/accountbox/AccountBox';
+import { AccountBox } from '../components/AccountBox/AccountBox';
 
 const StyledDiv = styled.div`
   height: 2400px

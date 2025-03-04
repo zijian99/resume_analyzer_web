@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import GlobalStyles from './styles/Global.styled';
 import About from './pages/About';
+import Home from './pages/Home';
 import ScrollToTop from './components/ScrolltoTop';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         {/* Route Setup */}
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home/>} />
             {/* element is to make that everything inside the<Route> has the <Layout> component */}
             <Route element={<Layout/>}> 
               {/* <Route path="/" element={<Navigate to="/dashboard" replace />} /> */}

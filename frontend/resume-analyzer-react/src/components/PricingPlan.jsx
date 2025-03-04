@@ -27,6 +27,11 @@ const PlanContainer = styled.div`
     margin: 3em;
 `;
 
+const ToggleContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // COMPONENT
 
@@ -119,13 +124,6 @@ const Button = styled.a`
         background-color: #5f30e2;
         color: white;
     }
-`;
-
-
-const ToggleContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
 `;
 
 const ToggleLabel = styled.span`
