@@ -11,53 +11,64 @@ import logo8 from "../../src/assets/logo_example/logoex8.gif";
 import { FaRegCirclePause } from "react-icons/fa6";
 import { FaRegCirclePlay } from "react-icons/fa6";
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// CONTAINER
 
 const CarouselContainer = styled.div`
-    padding: 5em;
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
+  
+  padding: 5em;
 `;
 
 const SliderContainer = styled.div`
+  position: relative;
+  white-space: nowrap;
+
+  border-radius: 20px;
+  
+  background: white;
+
   overflow: hidden;
   padding: 60px 0;
-  background: white;
-  white-space: nowrap;
-  border-radius: 20px;
-  position: relative;
 
   &:before,
   &:after {
     position: absolute;
-    top: 0;
+
+    z-index: 2;
     width: 250px;
     height: 100%;
+    top: 0;
+
     content: "";
-    z-index: 2;
   }
-//   animation-play-state: ${(props) => (props.isPaused ? "paused" : "")};
+
+  //animation-play-state: ${(props) => (props.isPaused ? "paused" : "")};
+
   &:before {
     left: 0;
-    // background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
+    //background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
   }
 
   &:after {
     right: 0;
-    // background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
+    //background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
   }
 
-//   &:hover .slideTrack {
-//     animation-play-state: paused;
-//   }
+  // &:hover .slideTrack {
+  //   animation-play-state: paused;
+  // }
 
   & .slideTrack {
     animation-play-state: ${(props) => (props.isPaused === true ? "paused" : "running")};
   }
 `;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// COMPONENT
+
 const SlideTrack = styled.div`
   display: inline-block;
+
   animation: ${(props) => (props.isPaused ? "none" : "20s slide infinite linear")};
 
   @keyframes slide {
@@ -72,22 +83,41 @@ const SlideTrack = styled.div`
 
 const Logo = styled.img`
   height: 100px;
+
   margin: 0 40px;
 `;
 
 const PauseButton = styled.button`
   align-self: flex-start; /* Keeps button on the left */
+
   cursor: pointer;
   border: none;
+
   background-color: white;
 `;
 
 const Text = styled.div`
-    font-size: 20px;
-    align-items: center;
-    text-align: center;
-    color: grey;
+  align-items: center;
+  text-align: center;
+
+  font-size: 20px;
+
+  color: grey;
 `;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const logos = [
+  logo1,
+  logo2,
+  logo3,
+  logo4,
+  logo5,
+  logo6,
+  logo7,
+  logo8,
+];
+
 
 const LogoCarousel = () => {
   const carouselRef = useRef(null);
@@ -100,30 +130,22 @@ const LogoCarousel = () => {
     container.appendChild(clone);
   }, []);
 
-  const logos = [
-    logo1,
-    logo2,
-    logo3,
-    logo4,
-    logo5,
-    logo6,
-    logo7,
-    logo8,
-  ];
 
   return (
     <CarouselContainer>
-    <Text>Trusted by 0 organization and 0 people</Text>
-    <SliderContainer ref={carouselRef} isPaused={isPaused}>
-        <SlideTrack className="slideTrack" >
-          {logos.map((logo, index) => (
-            <Logo key={index} src={logo} alt={`Logo ${index + 1}`} />
-          ))}
-        </SlideTrack>
+      <Text>Trusted by 0 organization and 0 people</Text>
+
+      <SliderContainer ref={carouselRef} isPaused={isPaused}>
+          <SlideTrack className="slideTrack" >
+            {logos.map((logo, index) => (
+              <Logo key={index} src={logo} alt={`Logo ${index + 1}`} />
+            ))}
+          </SlideTrack>
       </SliderContainer>
-    <PauseButton onClick={() => setIsPaused(!isPaused)}>
-    {isPaused ? <FaRegCirclePlay size={32} /> : <FaRegCirclePause size={32}  />}
-  </PauseButton>
+
+      <PauseButton onClick={() => setIsPaused(!isPaused)}>
+      {isPaused ? <FaRegCirclePlay size={32} /> : <FaRegCirclePause size={32}  />}
+    </PauseButton>
   </CarouselContainer>
     
   );

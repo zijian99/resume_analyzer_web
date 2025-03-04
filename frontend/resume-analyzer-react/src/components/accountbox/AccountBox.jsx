@@ -1,79 +1,162 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { LoginForm } from "./LoginForm";
-import { motion } from "framer-motion";
-import { AccountContext } from "./AccountContext";
-import { RegisterForm } from "./RegisterForm";
 import { NavLink } from "react-router-dom";
 import { SlArrowLeft } from "react-icons/sl";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { LoginForm } from "./LoginForm";
+import { AccountContext } from "./AccountContext";
+import { RegisterForm } from "./RegisterForm";
 
-const NavigateHomeButton = styled(NavLink)`
-    display: flex; /* Ensures the text stays in one line */
-    text-decoration: none; /* Optional: Removes underline */
-    white-space: nowrap; /* Prevents text wrapping */
-    padding: 0.5em 1em; /* Gives spacing */
-    // background-color: lightgray; /* Optional: Makes it visible */
-    border-radius: 5px; /* Optional: Makes it look nicer */
-    align-self: flex-start;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    color: white;
-    border: 2px solid white;
-    z-index: 10;
 
-    &:hover {
-    opacity: 0.8;
-  }
-`;
-const Span = styled.span`
-  margin: 0 0.5em;
-  display: flex;
-  align-items: center;
-`;
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CONTAINER
 
 const BoxContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+
   min-width: 50%;
   min-height: 90vh;
   height: 90vh;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 19px;
+  
   // background-color: grey;
+  border-radius: 19px;
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
-  position: relative;
+  
   padding: 2em 4em;
-  overflow: hidden;
   margin: 0.5em;
+
+  overflow: hidden;
 `;
 
 const TopContainer = styled.div`
-  width: 100%;
-  // height: 250px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+
+  width: 100%;
+  // height: 250px;
+  box-sizing: border-box;
+  
   // background-color: red;
+
   // padding: 0 3em;
   // padding-bottom: 5em;
   margin-top: 2em;
 `;
 
-const BackDrop = styled(motion.div)`
-  width: 120%;
-  height: 40%;
-  position: absolute;
+const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 20%;
+
+  width: 100%;
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  box-sizing: border-box;
+  
+  // background-color:black;
+
+  padding: 2em 0;
+  // margin: 1em 1em;
+  
+`;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// COMPONENT
+
+const HeaderText = styled.h2`
+  z-index: 10;
+
+  line-height: 1.24;
+  font-size: 35px;
+  font-weight: 600;
+  
+  // color: #fff;
+  // color:black;
+  color: white;
+  
+  margin: 0;
+`;
+
+const SmallText = styled.h5`
+  z-index: 10;
+
+  font-weight: 600;
+  font-size: 14px;
+
+  // color: #fff;
+  color: white;
+  
+  margin: 0;
+  margin-top: 1.5em;
+`;
+
+const Span = styled.span`
+  display: flex;
+  align-items: center;
+
+  margin: 0 0.5em;
+`;
+
+
+
+
+const NavigateHomeButton = styled(NavLink)`
+  // Ensures the text stays in one line
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  justify-content: center;
+  white-space: nowrap; /* Prevents text wrapping */
+    
+  // Gives spacing 
+  padding: 0.5em 1em; 
+  // Make sure it stay on top of BackDrop
+  z-index: 10;
+
+  border-radius: 5px; 
+  border: 2px solid white;
+  // background-color: lightgray; 
+  color: white;
+
+  // Removes underline 
+  text-decoration: none; 
+  font-weight: bold;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BACKDROP ANIMATION
+
+const BackDrop = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+
+  width: 120%;
+  height: 40%;
+  
+  // Manual Adjustment of Position of BackDrop
   // transform: rotate(60deg);
   top: -80px;
   right: -80px;
   // left: 2px;
+  
+  border-radius: 20%;
+
   // background: rgb(241, 196, 15);
   background: rgba(93, 47, 194, 1);
   background: linear-gradient(
@@ -81,43 +164,6 @@ const BackDrop = styled(motion.div)`
     rgba(93, 47, 194, 1) 20%,
     rgba(93, 27, 194, 1) 100%
   );
-`;
-
-const HeaderContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const HeaderText = styled.h2`
-  font-size: 35px;
-  font-weight: 600;
-  line-height: 1.24;
-  // color: #fff;
-  // color:black;
-  color: white;
-  z-index: 10;
-  margin: 0;
-`;
-
-const SmallText = styled.h5`
-  // color: #fff;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  z-index: 10;
-  margin: 0;
-  margin-top: 1.5em;
-`;
-
-const InnerContainer = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 2em 0;
-  // margin: 1em 1em;
-  // background-color:black;
 `;
 
 const backdropVariants = {
@@ -140,11 +186,16 @@ const expandingTransition = {
   duration: 2.3,
   stiffness: 30,
 };
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 export function AccountBox(props) {
   const [isExpanded, setExpanded] = useState(false);
   const [active, setActive] = useState("signin");
 
+  
+  // Function for Animation when changing Login and Register Form
   const playExpandingAnimation = () => {
     setExpanded(true);
     setTimeout(() => {
@@ -166,11 +217,14 @@ export function AccountBox(props) {
     }, 400);
   };
 
+  // Must be put after function is initialized
   const contextValue = { switchToSignup, switchToSignin };
+  
 
   return (
     <AccountContext.Provider value={contextValue}>
       <BoxContainer>
+
         <TopContainer>
           <BackDrop
             initial={false}
@@ -178,7 +232,6 @@ export function AccountBox(props) {
             variants={backdropVariants}
             transition={expandingTransition}
           />
-          {/* <BackDrop/> */}
           {active === "signin" && (
             <HeaderContainer>
               <HeaderText>Welcome</HeaderText>
@@ -198,6 +251,8 @@ export function AccountBox(props) {
             <Span>Back to Home</Span>
           </NavigateHomeButton>
         </TopContainer>
+
+        
         <InnerContainer>
           {active === "signin" && <LoginForm />}
           {active === "signup" && <RegisterForm />}

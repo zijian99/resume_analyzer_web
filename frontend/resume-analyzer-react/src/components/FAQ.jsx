@@ -1,29 +1,52 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CONTAINER
+
 const FAQContainer = styled.div`
-  min-width: 60%;
-  max-width: 80%;
-  margin: 10em 0;
   display: flex;
   flex-direction: column;
-//   background-color: grey;   
+
+  min-width: 60%;
+  max-width: 80%;
+  
+  //background-color: grey;   
+
+  margin: 10em 0;
 
 `;
 
+const AnswerContainer = styled.div`
+  max-height: ${({ isOpen }) => (isOpen ? "100px" : "0px")};
+  opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
+
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+
+  overflow: hidden;
+`;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// COMPONENT
+
 const Title = styled.h2`
   text-align: center;
+
   font-size: 2.5em;
   font-weight: bold;
+
   margin-bottom: 1em;
 `;
 
 const FAQItem = styled.div`
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  background: #fff;
+
   overflow: hidden;
   transition: all 0.3s ease-in-out;
-  background: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
   margin: 1em;
 `;
 
@@ -31,38 +54,41 @@ const Question = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+
+  border-radius: 8px;
   cursor: pointer;
+  
   font-size: 18px;
   font-weight: 600;
+
   background: #f8f9fa;
-  border-radius: 8px;
   transition: background 0.3s ease;
+
+  padding: 16px 20px;
 
   &:hover {
     background: #e9ecef;
   }
 `;
 
-const AnswerContainer = styled.div`
-  overflow: hidden;
-  max-height: ${({ isOpen }) => (isOpen ? "100px" : "0px")};
-  opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
-  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
-`;
-
 const Answer = styled.div`
-  padding: 16px 20px;
   font-size: 16px;
+
   color: #444;
+
+  padding: 16px 20px;
 `;
 
 const Icon = styled.span`
   font-size: 20px;
+
   transition: transform 0.3s ease;
   transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "rotate(0deg)")};
 `;
 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const faqs = [
   {
     question: "What is Resume Analyzer?",
@@ -81,6 +107,7 @@ const faqs = [
 const FAQ = () => {
   const [openIndexes, setOpenIndexes] = useState([]);
 
+  // Function for toggle button
   const toggleFAQ = (index) => {
     setOpenIndexes((prevIndexes) =>
       prevIndexes.includes(index)
@@ -92,6 +119,7 @@ const FAQ = () => {
   return (
     <FAQContainer>
       <Title>Frequently Asked Questions</Title>
+
       {faqs.map((faq, index) => (
         <FAQItem key={index}>
           <Question onClick={() => toggleFAQ(index)}>

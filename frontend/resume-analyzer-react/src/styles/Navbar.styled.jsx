@@ -3,79 +3,82 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const ClickableImg = styled(NavLink)`
-  align-self: start;
   display: flex;
   align-items: center;
+  align-self: start;
   justify-content: center;
-  text-decoration: none;
-  font-weight: bold;
-  color: inherit;
+
   width: 5%; 
   cursor: pointer;
+
+  text-decoration: none;
+  font-weight: bold;
+
+  color: inherit;
+
   &:hover {
     opacity: 0.9;
   }
-    @media (max-width: 704px) {
+  @media (max-width: 704px) {
     display: block;
     margin: 2rem auto;
   }
 `;
 
 const NavbarWrapper = styled.nav`
-  position: fixed;
-  width: 100vw;
-  box-sizing: border-box;
-  top: 0;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: white;
-  padding: 1rem 3rem;
+  justify-content: space-between;
+  position: fixed;
 
   z-index: 1000;
+  width: 100vw;
+  top: 0;
+  box-sizing: border-box;
+
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+
+  background: white;
+  
+  padding: 1rem 3rem;
+
   @media (max-width: 704px) {
     flex-direction: column;
+
     padding: 1rem;
   }
   
 `;
 
-// const NavbarWrapper = styled.nav`
-//   position: fixed; 
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   background: white;
-//   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 1rem 3rem;
-//   z-index: 1000; /* Ensure it stays on top */
-// `;
-
 const NavLinkWrapper = styled.div`
   @media (max-width: 704px) {
     display: ${(props) => (props.active ? "block" : "none")};
+
     text-align: center;
+
     padding: 2rem 0;
   }
 `;
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
-  transition: 0.2s;
-  color: black;
   font-weight: bold;
+
+  color: black;
+
+  transition: 0.2s;
   margin-left: 2rem;
+
   &:last-child {
+    border-radius: 10px;
+
     //background: #007dfc;
     // background: #3cc9b4;
     background: #5f30e2;
     color: white;
+
     padding: 0.5rem 1rem;
-    border-radius: 10px;
+
     &:hover {
       color: white;
       opacity: 0.8;
@@ -99,23 +102,10 @@ const StyledNavLink = styled(NavLink)`
 
   @media (max-width: 704px) {
     display: block;
+
     margin: 2rem auto;
   }
 `;
-
-// const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
-//   display: none;
-//   position: absolute;
-//   right: 20px;
-//   top: 21px;
-//   color: white;
-//   font-size: 1.8rem;
-//   cursor: pointer;
-//   @media (max-width: 704px){
-//     display: block;
-//   }
-//   };
-// `;
  
 
 export {
@@ -123,5 +113,4 @@ export {
     NavbarWrapper,
     NavLinkWrapper,
     StyledNavLink,
-    // StyledFontAwesomeIcon,
-  };
+};

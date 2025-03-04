@@ -15,13 +15,13 @@ export function LoginForm(props) {
 
   return (
     <BoxContainer>
+
       <FormContainer>
         <Input type="email" placeholder="Email" />
         <Input type="password" placeholder="Password" />
       </FormContainer>
-      {/* <Marginer direction="vertical" margin={10} /> */}
-      <MutedLink href="#">Forget your password?</MutedLink>
 
+      <MutedLink href="#">Forget your password?</MutedLink>
       <SubmitButton type="submit">Sign In</SubmitButton>
 
       <MutedLink href="#">

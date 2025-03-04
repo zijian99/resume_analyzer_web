@@ -1,41 +1,53 @@
 import React from "react";
 import styled from "styled-components";
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CONTAINER
 
 const FooterContainer = styled.footer`
-  background-color: #f8f9fa;
-  padding: 5em 5em;
-  margin-top: 65vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  background-color: #f8f9fa;
+
+  padding: 5em 5em;
+  margin-top: 65vh;
 `;
 
 const FooterWrapper = styled.div`
-  width: 90%;
   display: flex;
-  justify-content: space-between;
   align-items: stretch;  /* Make all sections equal height */
-  gap: 20px;
+  justify-content: space-between;
   flex-wrap: wrap;
+  
+  width: 90%;
+  gap: 20px;
+ 
 `;
 
 const FooterSection = styled.div`
-  flex: 1;  /* Make all sections take equal width */
   display: flex;
   flex-direction: column;  /* Ensure the content is evenly spread */
+  flex: 1;  /* Make all sections take equal width */
   
   h3 {
     font-size: 16px;
     font-weight: bold;
+
     margin-bottom: 2em;
   }
 `;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// COMPONENT
+
 const FooterLink = styled.a`
   text-decoration: none;
-  color: #333;
   font-size: 14px;
+
+  color: #333;
+  
   margin-bottom: 1em;
 
   &:hover {
@@ -45,10 +57,12 @@ const FooterLink = styled.a`
 `;
 
 const CopyrightText = styled.div`
-    margin-top: 5em;
-    font-size: 12px;
-
+  font-size: 12px;
+  
+  margin-top: 5em;
 `;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const sections = [
   {
@@ -94,6 +108,7 @@ const sections = [
 const Footer = () => {
   return (
     <FooterContainer>
+
       <FooterWrapper>
         {sections.map((section, index) => (
           <FooterSection key={index}>
@@ -106,6 +121,7 @@ const Footer = () => {
           </FooterSection>
         ))}
       </FooterWrapper>
+
       <CopyrightText>2025 © Resume Analyzer Inc.</CopyrightText>
     </FooterContainer>
   );

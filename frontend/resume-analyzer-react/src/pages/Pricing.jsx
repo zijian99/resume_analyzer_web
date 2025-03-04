@@ -7,6 +7,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   margin-top: 6em;
 
 `;
@@ -14,10 +15,12 @@ const Title = styled.h2`
   font-size: 3em;
 `;
 const Text = styled.div`
-    font-size: 20px;
-    align-items: center;
-    text-align: center;
-    color: grey;
+  align-items: center;
+
+  text-align: center;
+  font-size: 20px;
+    
+  color: grey;
 `;
 
 const Pricing = () => {
@@ -31,4 +34,4 @@ const Pricing = () => {
   )
 }
 
-export default Pricing
+export default Pricing;
