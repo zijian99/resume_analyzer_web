@@ -260,7 +260,7 @@ const PricingPlan = () => {
                         {plan.description}
                     </Description>
 
-                    <Button active={plan.active} href="#">{plan.monthlyPrice>=0? "Choose Plan" : "Contact Sales"}</Button>
+                    <Button active={plan.active}>{plan.monthlyPrice>=0? "Choose Plan" : "Contact Sales"}</Button>
 
                     <List>
                         {plan.features.map((feature, i) => (

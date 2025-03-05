@@ -1,8 +1,11 @@
 import React from 'react'
+import TechStack from '../components/TechStack';
 
 const About = () => {
   return (
-    <div>About</div>
+    <div>About
+      <TechStack/>
+    </div>
   )
 }
 

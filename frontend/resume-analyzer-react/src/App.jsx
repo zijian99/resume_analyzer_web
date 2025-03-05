@@ -9,6 +9,7 @@ import GlobalStyles from './styles/Global.styled';
 import About from './pages/About';
 import Home from './pages/Home';
 import ScrollToTop from './components/ScrolltoTop';
+import GrammarChecker from './pages/GrammarChecker';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home/>} />
+          <Route path="/grammarchecker" element={<GrammarChecker/>} />
             {/* element is to make that everything inside the<Route> has the <Layout> component */}
             <Route element={<Layout/>}> 
               {/* <Route path="/" element={<Navigate to="/dashboard" replace />} /> */}
