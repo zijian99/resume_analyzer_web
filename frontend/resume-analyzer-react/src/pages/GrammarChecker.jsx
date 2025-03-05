@@ -6,7 +6,7 @@ import axios from "axios";
 const PageContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   background-color: #f8f9fc;
 `;
 
@@ -28,7 +28,7 @@ const ResultPanel = styled.div`
 `;
 
 const TextEditor = styled.div`
-  flex: 1;
+  // flex: 1;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -40,6 +40,11 @@ const TextEditor = styled.div`
   outline: none;
   white-space: pre-wrap;
   word-wrap: break-word;
+
+  &:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+  }
 `;
 
 const Button = styled.button`

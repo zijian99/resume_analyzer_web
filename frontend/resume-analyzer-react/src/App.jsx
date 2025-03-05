@@ -10,7 +10,8 @@ import About from './pages/About';
 import Home from './pages/Home';
 import ScrollToTop from './components/ScrolltoTop';
 import GrammarChecker from './pages/GrammarChecker';
-
+import LayoutMain from './pages/LayoutMain';
+import ResumeAnalyzer from './pages/ResumeAnalyzer';
 function App() {
 
   return (
@@ -23,8 +24,11 @@ function App() {
         {/* Route Setup */}
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/grammarchecker" element={<GrammarChecker/>} />
+          <Route element={<LayoutMain/>}> 
+            <Route path="/home" element={<Home/>} />
+            <Route path="/resumeanalyzer" element={<ResumeAnalyzer/>} />
+            <Route path="/grammarchecker" element={<GrammarChecker/>} />
+          </Route> 
             {/* element is to make that everything inside the<Route> has the <Layout> component */}
             <Route element={<Layout/>}> 
               {/* <Route path="/" element={<Navigate to="/dashboard" replace />} /> */}
