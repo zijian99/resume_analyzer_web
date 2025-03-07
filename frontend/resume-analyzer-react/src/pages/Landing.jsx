@@ -10,6 +10,8 @@ import content3 from "../../src/assets/content3.gif";
 import content5 from "../../src/assets/content5.gif";
 import LogoCarousel from "../components/LogoCarousel";
 import PricingPlan from "../components/PricingPlan";
+import { AiOutlineDownload } from "react-icons/ai";
+
 
 
 
@@ -80,6 +82,14 @@ const PricingContainer = styled.div`
 
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  // justify-content: center;
+
+`;
+
 
 const HeaderText = styled.h2`
   // z-index: 10;
@@ -121,6 +131,7 @@ const GetAccountButton = styled(NavLink)`
   // background: #3cc9b4;
   background: #5f30e2;
   color: white;
+  
 
   transition: 0.2s;
 
@@ -133,10 +144,39 @@ const GetAccountButton = styled(NavLink)`
   }
 `;
 
+const DownloadMobileButton = styled(NavLink)`
+  display: flex;
+  width: fit-content;
+
+  border-radius: 5px;
+
+  text-decoration: none;
+  // text-transform: uppercase;
+  // font-weight: bold;
+
+  // background: #007dfc;
+  // background: #3cc9b4;
+  // background: #5f30e2;
+  color: black;
+  border: 1px solid black;
+
+  transition: 0.2s;
+
+  margin: 2em 0;
+  margin-left: 1em;
+  padding: 2em 1em;
+
+  &:hover {
+    color: #5f30e2;;
+    opacity: 0.8;
+  }
+`;
+
 const GetAccountBoldText = styled.div`
   white-space: nowrap;
 
   font-weight: bold;
+  margin-right: 0.5em;
 `;
 
 const GetAccountText = styled.div`
@@ -288,11 +328,17 @@ const Landing = () => {
             <HeaderText>Resume Analyzer that ensure your resume quality and writing shine </HeaderText>
             <SmallText>Work with AI that helps with your resume analysis and feedback, to get you to your desired jobs. </SmallText>
 
-            <GetAccountButton to="/login"> 
-              <GetAccountBoldText>Get Your Account</GetAccountBoldText>
-              <GetAccountText>It's Free </GetAccountText>
-              <GoArrowRight/>
-            </GetAccountButton>
+            <ButtonContainer>
+              <GetAccountButton to="/login"> 
+                <GetAccountBoldText>Get Your Account</GetAccountBoldText>
+                <GetAccountText>It's Free </GetAccountText>
+                <GoArrowRight/>
+              </GetAccountButton>
+              <DownloadMobileButton to="/mobile"> 
+                <GetAccountBoldText>Download App For Mobile</GetAccountBoldText>
+                <AiOutlineDownload />
+              </DownloadMobileButton>
+            </ButtonContainer>
 
             <div> By signing up, you agree to the Terms and Conditions and Privacy Policy.</div>
             <div> The Website is using Google Gemini Flash 2.0.</div>

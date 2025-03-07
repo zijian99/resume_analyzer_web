@@ -12,7 +12,9 @@ import ScrollToTop from './components/ScrolltoTop';
 import GrammarChecker from './pages/GrammarChecker';
 import LayoutMain from './pages/LayoutMain';
 import ResumeAnalyzer from './pages/ResumeAnalyzer';
-
+import { useNavigate } from 'react-router-dom';
+import MobileDownload from './pages/MobileDownload';
+import RedirectIfMobile from './components/RedirectIfMobile';
 
 function App() {
 
@@ -22,10 +24,11 @@ function App() {
         {/* Some Setup */}
         <GlobalStyles/>
         <ScrollToTop/>
-
+        <RedirectIfMobile/>
         {/* Route Setup */}
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/mobile" element={<MobileDownload />} />
           <Route element={<LayoutMain/>}> 
             <Route path="/home" element={<Home/>} />
             <Route path="/resumeanalyzer" element={<ResumeAnalyzer/>} />
