@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { keyframes } from "styled-components";
 import CircularScoreIndicator from "../components/CircularScoreIndicator";
 import ScoreProgressBar from "../components/ScoreProgressBar";
+import loadingGIF from "../assets/loading.gif"
 
 // Mock Resume Analysis Data
 const mockAnalysis = {
@@ -29,6 +31,9 @@ const PageContainer = styled.div`
   display: flex;
   width: 100%;
   height: 90vh;
+  background-color: white;
+  padding: 0 2em;  /* Add padding */
+  box-sizing: border-box; /* Ensures padding doesn't affect the total height */
   // background-color: #f8f9fc;
   // background-color: blue;
 `;
@@ -47,7 +52,7 @@ const AnalysisPanel = styled.div`
   // box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
   // overflow: auto;
 
-  // width: 50%;
+  min-width: 50%;
   padding: 2em;
   background-color: white;
   display: flex;
@@ -56,7 +61,7 @@ const AnalysisPanel = styled.div`
   // box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
 
   height: 90%; /* Keeps it constrained */
-  overflow-y: auto; /* Enables vertical scrolling if needed */
+  // overflow-y: auto; /* Enables vertical scrolling if needed */
 
 
 `;
@@ -82,6 +87,26 @@ const ProgressContainer = styled.div`
   overflow: hidden;
   position: absolute;
   bottom: 20px;
+`;
+
+
+const ReturnButton = styled.button`
+  align-self: flex-start; /* Aligns to the left inside ScoreDisplayContainer */
+  background: white;
+  color: black;
+  border: 2px solid black;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  // margin-bottom: 10px; /* Adds space below the button */
+
+  &:hover {
+    opacity: 0.8;
+    color: #5f30e2;
+    border: 2px solid #5f30e2;
+  }
 `;
 
 const ProgressBar = styled.div`
@@ -131,6 +156,7 @@ const ScoreDisplayContainer = styled.div`
   align-items: center;
   // justify-content: start;
   width: 100%;
+  
   // box-sizing: border-box;
 `;
 
@@ -175,11 +201,40 @@ const Feedback = styled.p`
   margin-bottom: 15px;
 `;
 
+// ** Loading Animation **
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+const LoadingScreen = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #fcfcff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+`;
+
+const Spinner = styled.div`
+  border: 6px solid #ddd;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: ${spin} 1s linear infinite;
+`;
+
 const ResumeAnalyzer = () => {
   const [file, setFile] = useState(null);
   const [analyzed, setAnalyzed] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleUpload = (event) => {
     const uploadedFile = event.target.files[0];
@@ -208,16 +263,38 @@ const ResumeAnalyzer = () => {
 
   const handleAnalyze = () => {
     if (file) {
-      setAnalyzed(true);
+      setLoading(true); // ** Show loading animation **
+      
+      setTimeout(() => {
+        console.log("Analysis complete, hiding loading screen...");
+        setLoading(false);
+        setAnalyzed(true);
+      }, 2000);
     }
   };
 
+  const handleReturn = () => {
+    setAnalyzed(false);
+    setFile(null);
+    setProgress(0);
+  }
+
   return (
+    <>
+    {/* Show Full-Screen Loading when Analyzing */}
+    {loading && (
+      <LoadingScreen>
+       <img style={{width:"100px", height:"100px"}} src={loadingGIF} alt=""/>
+      </LoadingScreen>
+    )}
+    {!loading &&
     <PageContainer>
       {/* Left Side - Resume Score Analysis */}
       <AnalysisPanel>
         {!analyzed ? (
+          
           <UploadSection>
+            {/* <h1 style={{color:"#5f30e2"}}>Resume Analyzer</h1> */}
             <h2>Upload Your Resume (PDF Only)</h2>
             <input type="file" accept="application/pdf" onChange={handleUpload} />
             <UploadButton onClick={handleAnalyze} disabled={!file}>
@@ -226,6 +303,7 @@ const ResumeAnalyzer = () => {
           </UploadSection>
         ) : (
           <ScoreDisplayContainer>
+            <ReturnButton onClick={handleReturn}>{"<<"} Upload Again</ReturnButton>
             <h2>Resume Score: 85/100</h2>
             <CircularScoreIndicator score={85}/>
             
@@ -256,7 +334,7 @@ const ResumeAnalyzer = () => {
       </AnalysisPanel>
 
       {/* Right Side - PDF Viewer with Progress Bar */}
-      {false && <ResumeViewerPanel>
+      {!analyzed && <ResumeViewerPanel>
         {uploading ? (
           <ProgressContainer>
             <ProgressBar progress={progress} />
@@ -268,6 +346,9 @@ const ResumeAnalyzer = () => {
         )}
       </ResumeViewerPanel>}
     </PageContainer>
+
+  }
+  </>
   );
 };
 

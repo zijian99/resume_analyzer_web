@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const MainContent = styled.div`
-  flex: 1;
+  // flex: 1;
   padding-top: 9vh ; /* Should match or be slightly larger than navbar height */
 `;
 

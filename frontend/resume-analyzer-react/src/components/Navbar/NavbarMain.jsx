@@ -28,6 +28,7 @@ const NavbarWrapper = styled.nav`
 const NavLinkWrapper = styled.div`
   display: flex;
   align-items: center;
+  
 
   @media (max-width: 704px) {
     display: ${(props) => (props.active ? "block" : "none")};
