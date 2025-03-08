@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { AccountBox } from '../components/AccountBox/AccountBox';
+import { AccountBox } from '../components/AuthComponent/AccountBox';
 
 const StyledDiv = styled.div`
   height: 2400px
@@ -14,7 +14,7 @@ const LoginContainer = styled.div`
 
   width: 100%;
   height: 100%;
-`;
+`; 
 
 const LoginBackground = styled.img`
   align-items: center;

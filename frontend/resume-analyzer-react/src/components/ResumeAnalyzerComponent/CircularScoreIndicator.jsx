@@ -9,8 +9,8 @@ const getColor = (score) => {
 
 const CircularContainer = styled.div`
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,9 +41,9 @@ const fadeIn = keyframes`
 `;
 
 const ScoreText = styled.div`
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: ${(props) => getColor(props.score)};
   animation: ${fadeIn} 1s ease-in-out;
 `;
 
@@ -77,7 +77,7 @@ const CircularScoreIndicator = ({ score }) => {
 
   return (
     <CircularContainer>
-      <Svg width="120" height="120" viewBox="0 0 120 120">
+      <Svg width="200" height="200" viewBox="0 0 120 120">
         {/* Background Circle */}
         <CircleBackground cx="60" cy="60" r={radius} />
 
@@ -93,7 +93,7 @@ const CircularScoreIndicator = ({ score }) => {
       </Svg>
 
       {/* Animated Score Text */}
-      <ScoreText>{animatedScore}</ScoreText>
+      <ScoreText score={score}>{animatedScore}/100</ScoreText>
     </CircularContainer>
   );
 };

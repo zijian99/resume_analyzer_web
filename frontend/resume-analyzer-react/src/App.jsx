@@ -15,6 +15,7 @@ import ResumeAnalyzer from './pages/ResumeAnalyzer';
 import { useNavigate } from 'react-router-dom';
 import MobileDownload from './pages/MobileDownload';
 import RedirectIfMobile from './components/RedirectIfMobile';
+import ResumeAnalyzeResult from './components/ResumeAnalyzerComponent/ResumeAnalyzeResult';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/home" element={<Home/>} />
             <Route path="/resumeanalyzer" element={<ResumeAnalyzer/>} />
             <Route path="/grammarchecker" element={<GrammarChecker/>} />
+            <Route path="/anademo" element={<ResumeAnalyzeResult />} />
           </Route> 
             {/* element is to make that everything inside the<Route> has the <Layout> component */}
             <Route element={<Layout/>}> 

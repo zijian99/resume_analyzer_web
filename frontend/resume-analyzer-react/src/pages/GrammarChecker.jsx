@@ -214,7 +214,7 @@ const GrammarChecker = () => {
       </ResultPanel>
     </PageContainer>
   );
-};
+}; 
 
 export default GrammarChecker;
 
