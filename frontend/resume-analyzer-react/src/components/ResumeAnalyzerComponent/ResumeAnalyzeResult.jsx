@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CircularScoreIndicator from "./CircularScoreIndicator";
+import ScoreHeatmapBar from "./ScoreHeatmapBar";
 
 const mockData = {
   filename: "zchua_resume_software.pdf",
@@ -73,8 +74,15 @@ const ScorePanel = styled.div`
 
 const AnalysisPanel = styled.div`
   flex: 1;
-  padding: 0 20px;
+  padding: 2em;
+  margin-left: 2em;
+  border-radius: 20px;
+  background-color: rgba(219, 217, 217, 0.2); /* Light grey with transparency */
+  backdrop-filter: blur(20px); /* Frosted glass effect */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border to enhance glass effect */
 `;
+
 
 const ScoreIndicatorWrapper = styled.div`
   display: flex;
@@ -85,7 +93,7 @@ const ScoreIndicatorWrapper = styled.div`
 const ScoreItem = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 0.8em 0;
+  padding: 0.5em 0;
   font-size: 16px;
 `;
 
@@ -120,6 +128,12 @@ const AnalysisSection = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
+const SuggestionContainer = styled.div`
+  background-color: black;
+  padding: 2em;
+
+`;
+
 const ProgressBar = styled.div`
   width: 100%;
   height: 10px;
@@ -145,7 +159,7 @@ const ResumeAnalyzeResult = () => {
     <PageContainer>
       {/* Sticky Score Panel */}
       <ScorePanel>
-        <h3>Your Score</h3>
+        <h3>Your Resume Score</h3>
         <ScoreIndicatorWrapper>
           <CircularScoreIndicator score={analysis.score} />
         </ScoreIndicatorWrapper>
@@ -163,31 +177,39 @@ const ResumeAnalyzeResult = () => {
         <ScoreItem>
           <span>Skills</span> <ScoreValue score={analysis.skills_score}>{analysis.skills_score}%</ScoreValue>
         </ScoreItem>
+        <ScoreItem>
+          <span style={{fontWeight:"bold", color:"red"}}>~ Note that this is an AI Generated Result ~</span> 
+        </ScoreItem>
       </ScorePanel>
 
       {/* Scrollable Analysis Panel */}
       <AnalysisPanel>
+        <h2>✧ RESULT HERE (⁎˃ᆺ˂) ✧</h2>
         <AnalysisSection>
           <h3>📘 ATS PARSE RATE</h3>
           <p>
             An <strong>Applicant Tracking System</strong> (ATS) is used by employers and recruiters to quickly scan resumes.
           </p>
-          <ProgressBar progress={analysis.ats_parse_rate} />
+          <ScoreHeatmapBar score={analysis.ats_parse_rate}/>
+          {/* <ProgressBar progress={analysis.ats_parse_rate} /> */}
           <h4>Great!</h4>
           <p>We parsed {analysis.ats_parse_rate}% of your resume successfully using an industry-leading ATS.</p>
         </AnalysisSection>
 
+
         {analysis.analysis.map((item, index) => (
           <AnalysisSection key={index}>
-            <h3>
+            <h3 style={{textTransform:"uppercase"}}>
               {categoryIcons[item.category]} {item.category}
             </h3>
+            <Divider/>
             <p><strong>Feedback:</strong></p>
             <p>{item.feedback}</p>
             <p><strong>Suggestions:</strong></p>
             <p>{item.suggestions}</p>
           </AnalysisSection>
         ))}
+
 
       </AnalysisPanel>
     </PageContainer>

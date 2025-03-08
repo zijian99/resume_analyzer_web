@@ -265,10 +265,6 @@ const ResumeAnalyzer = () => {
           </UploadSection>
         ) : (
           <ResultContainer>
-            {/* <ReturnButton onClick={handleReturn}>
-              <FiArrowLeft size={20} /> Upload Again
-            </ReturnButton> */}
-            {/* <h2>Resume Score: 85/100</h2> */}
             <ResumeAnalyzeResult/>
             <FloatingBackButton onClick={handleReturn}>
               <FiChevronLeft size={24} />
