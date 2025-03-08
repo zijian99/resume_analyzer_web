@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import loadingGIF from "../assets/loading.gif"
 import { FiChevronLeft } from "react-icons/fi"; // Import a clean arrow icon
 import ResumeAnalyzeResult from "../components/ResumeAnalyzerComponent/ResumeAnalyzeResult";
+import ResumeAnalyzeResultDemo from "../components/ResumeAnalyzerComponent/ResumeAnalyzeResultDemo";
 
 
 // Styled Components
@@ -13,24 +15,9 @@ const PageContainer = styled.div`
   background-color: white;
   padding: 0 2em;  /* Add padding */ 
   box-sizing: border-box; /* Ensures padding doesn't affect the total height */
-  // background-color: #f8f9fc;
-  // background-color: blue;
 `;
 
 const AnalysisPanel = styled.div`
-  // width: 50%;
-  // height: 90vh; 
-  // // background-color: grey; 
-  // // margin: 2em;  
-  // padding: 2em;
-  // background-color: white;
-  // // display: flex;
-  // // flex-direction: column;
-  // justify-content: center;
-  // // gap: 20px;
-  // box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
-  // overflow: auto;
-
   min-width: 50%;
   flex-grow:1;
   margin: 1em;
@@ -118,12 +105,6 @@ const ResultContainer = styled.div`
   flex-direction: column;
   align-items: flex-start; /* Aligns all content to the left */
   width: 100%;
-
-  //   display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // // justify-content: start;
-  // width: 100%;
   
   // // box-sizing: border-box;
 `;
@@ -162,7 +143,7 @@ const FloatingBackButton = styled.button`
 
   &:hover {
     opacity: 0.8;
-    // background-color: grey;
+
   }
 `;
 
@@ -173,33 +154,10 @@ const ResumeAnalyzer = () => {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [textAnalysis, setTextAnalysis] = useState(null);
 
-  const handleUpload = (event) => {
-    const uploadedFile = event.target.files[0];
-    if (uploadedFile && uploadedFile.type === "application/pdf") {
-      setUploading(true);
-      setProgress(0);
 
-      const fileURL = URL.createObjectURL(uploadedFile);
-
-      // Simulate Progress Bar Increase
-      let progressInterval = setInterval(() => {
-        setProgress((oldProgress) => {
-          if (oldProgress >= 100) {
-            clearInterval(progressInterval);
-            setUploading(false);
-            setFile(fileURL);
-            return 100;
-          }
-          return oldProgress + 50; // Increase by 20% every 400ms (total ~2 seconds)
-        });
-      }, 400);
-    } else {
-      alert("Only PDF files are allowed.");
-    }
-  };
-
-  const handleAnalyze = () => {
+  const handleAnalyzeDemo = () => {
     if (file) {
       setLoading(true); // ** Show loading animation **
       
@@ -210,6 +168,72 @@ const ResumeAnalyzer = () => {
       }, 2000);
     }
   };
+
+  const handleUpload = (event) => {
+    const uploadedFile = event.target.files[0];
+  
+    if (uploadedFile && uploadedFile.type === "application/pdf") {
+      setUploading(true);
+      setProgress(0);
+  
+      // Generate a URL to preview the file
+      const fileURL = URL.createObjectURL(uploadedFile);
+      
+      setFile({ raw: uploadedFile, preview: fileURL }); // Store both raw file and preview URL
+  
+      // Simulate progress bar
+      let progressInterval = setInterval(() => {
+        setProgress((oldProgress) => {
+          if (oldProgress >= 100) {
+            clearInterval(progressInterval);
+            setUploading(false);
+            return 100;
+          }
+          return oldProgress + 50;
+        });
+      }, 400);
+    } else {
+      alert("Only PDF files are allowed.");
+    }
+  };
+  
+  
+  
+  const handleAnalyze = async () => {
+    if (!file) {
+      alert("Please upload a PDF file first.");
+      return;
+    }
+  
+    setLoading(true);
+  
+    try {
+      const formData = new FormData();
+      formData.append("file", file.raw); // Ensure it's the actual File object
+  
+      const result = await axios.post("http://127.0.0.1:8000/upload_resume/", formData, {
+        headers: { "Accept": "application/json" },
+      });
+  
+      setLoading(false);
+  
+      if (result.data && result.data.analysis) {
+        console.log(result.data)
+        console.log(result.data.analysis)
+
+        setTextAnalysis(result.data.analysis);
+        setAnalyzed(true);
+      } else {
+        alert("Unexpected response from server.");
+      }
+    } catch (error) {
+      console.error("Error analyzing resume:", error.response?.data || error.message);
+      alert("Failed to analyze resume. Please try again.");
+      setLoading(false);
+    }
+  };
+  
+  
 
   const handleReturn = () => {
     setAnalyzed(false);
@@ -241,10 +265,14 @@ const ResumeAnalyzer = () => {
             <UploadButton onClick={handleAnalyze} disabled={!file}>
               Analyze
             </UploadButton>
+            {/* <UploadButton onClick={handleAnalyzeDemo} disabled={!file}>
+              AnalyzeDemo
+            </UploadButton> */}
           </UploadSection>
         ) : (
           <ResultContainer>
-            <ResumeAnalyzeResult/>
+            <ResumeAnalyzeResult textAnalysis={textAnalysis}/>
+            {/* <ResumeAnalyzeResultDemo/> */}
             <FloatingBackButton onClick={handleReturn}>
               <FiChevronLeft size={24} />
               Back to Upload Again
@@ -262,7 +290,7 @@ const ResumeAnalyzer = () => {
             <ProgressBar progress={progress} />
           </ProgressContainer>
         ) : file ? (
-          <PdfViewer src={`${file}#toolbar=0&view=fitH`} />
+          <PdfViewer src={file?.preview ? `${file.preview}#toolbar=0&view=fitH` : ""} />
         ) : (
           <p>Upload a PDF to Preview</p>
         )} 

@@ -17,11 +17,10 @@ const PageContainer = styled.div`
 const EditorPanel = styled.div`
   flex: 1;
   padding: 2em;
-  top:10%;
+  top: 10%;
   // margin-left: 2em;
   border-radius: 20px;
   overflow-y: auto;  /* Enables scrolling */
-  // overflow: auto;  /* Allows scrolling */
   height: 70vh;   /* Ensures it takes full viewport height */
   margin-bottom: 5%;
   // max-height: 100vh; /* Prevents exceeding screen height */

@@ -3,6 +3,45 @@ import styled from "styled-components";
 import CircularScoreIndicator from "./CircularScoreIndicator";
 import ScoreHeatmapBar from "./ScoreHeatmapBar";
 
+const mockData = {
+  filename: "zchua_resume_software.pdf",
+  analysis: {
+    score: 78,
+    content_score: 80,
+    format_score: 85,
+    sections_score: 75,
+    skills_score: 80,
+    ats_parse_rate: 90,
+    analysis: [
+      {
+        category: "Content Suggestions",
+        feedback: "The resume effectively highlights relevant projects and internships. The use of action verbs is good.",
+        suggestions: "Quantify accomplishments whenever possible (e.g., 'Improved data retrieval time by X%'). Consider adding a brief summary or objective statement at the beginning to highlight key skills and career goals."
+      },
+      {
+        category: "Spelling & Grammar",
+        feedback: "The resume appears to be free of major spelling and grammatical errors.",
+        suggestions: "Proofread carefully, paying attention to articles (a/an/the) and subject-verb agreement. Use tools like Grammarly to ensure accuracy."
+      },
+      {
+        category: "Resume Length",
+        feedback: "The resume is a good length for someone with your experience level.",
+        suggestions: "Ensure that all content is relevant and high-impact. Remove any redundant information."
+      },
+      {
+        category: "Personal Details",
+        feedback: "Contact information is clearly presented, including links to GitHub and LinkedIn.",
+        suggestions: "Ensure that the links are working and up-to-date. Consider adding your location (city, state) for clarity."
+      },
+      {
+        category: "Formatting Tips",
+        feedback: "The resume is well-formatted and easy to read.",
+        suggestions: "Use consistent formatting throughout (e.g., date formats, bullet point styles). Consider using a professional resume template to enhance visual appeal."
+      }
+    ]
+  }
+};
+
 const categoryIcons = {
   "Content Suggestions": "✅",  // Check mark for good content
   "Spelling & Grammar": "🔤",  // Letters for spelling & grammar
@@ -89,37 +128,54 @@ const AnalysisSection = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
- 
-const ResumeAnalyzeResult = ({textAnalysis}) => {
-  if (!textAnalysis) {
-    return <p>No analysis available. Please Try Again!</p>;
-  }
-  console.log(textAnalysis)
-  // const { analysis } = textAnalysis;
+const SuggestionContainer = styled.div`
+  background-color: black;
+  padding: 2em;
 
-  // console.log(analysis)
+`;
+
+const ProgressBar = styled.div`
+  width: 100%;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    width: ${({ progress }) => `${progress}%`};
+    height: 100%;
+    background: green;
+    border-radius: 5px;
+  }
+`;
+ 
+const ResumeAnalyzeResultDemo = () => {
+  const { analysis } = mockData;
 
   return (
     <PageContainer>
       {/* Sticky Score Panel */}
       <ScorePanel>
-        <h3>Your Resume Score</h3>
+        <h3>Your DEMO Resume Score</h3>
         <ScoreIndicatorWrapper>
-          <CircularScoreIndicator score={textAnalysis.score} />
+          <CircularScoreIndicator score={analysis.score} />
         </ScoreIndicatorWrapper>
         <Divider />
         
         <ScoreItem>
-          <span>Content</span> <ScoreValue score={textAnalysis.content_score}>{textAnalysis.content_score}%</ScoreValue>
+          <span>Content</span> <ScoreValue score={analysis.content_score}>{analysis.content_score}%</ScoreValue>
         </ScoreItem>
         <ScoreItem>
-          <span>Format</span> <ScoreValue score={textAnalysis.format_score}>{textAnalysis.format_score}%</ScoreValue>
+          <span>Format</span> <ScoreValue score={analysis.format_score}>{analysis.format_score}%</ScoreValue>
         </ScoreItem>
         <ScoreItem>
-          <span>Sections</span> <ScoreValue score={textAnalysis.sections_score}>{textAnalysis.sections_score}%</ScoreValue>
+          <span>Sections</span> <ScoreValue score={analysis.sections_score}>{analysis.sections_score}%</ScoreValue>
         </ScoreItem>
         <ScoreItem>
-          <span>Skills</span> <ScoreValue score={textAnalysis.skills_score}>{textAnalysis.skills_score}%</ScoreValue>
+          <span>Skills</span> <ScoreValue score={analysis.skills_score}>{analysis.skills_score}%</ScoreValue>
         </ScoreItem>
         <ScoreItem>
           <span style={{fontWeight:"bold", color:"red"}}>~ Note that this is an AI Generated Result ~</span> 
@@ -128,20 +184,20 @@ const ResumeAnalyzeResult = ({textAnalysis}) => {
 
       {/* Scrollable Analysis Panel */}
       <AnalysisPanel>
-        <h2>✧ RESULT HERE (⁎˃ᆺ˂) ✧</h2>
+        <h2>✧ DEMO RESULT HERE (⁎˃ᆺ˂) ✧</h2>
         <AnalysisSection>
           <h3>📘 ATS PARSE RATE</h3>
           <p>
             An <strong>Applicant Tracking System</strong> (ATS) is used by employers and recruiters to quickly scan resumes.
           </p>
-          <ScoreHeatmapBar score={textAnalysis.ats_parse_rate}/>
+          <ScoreHeatmapBar score={analysis.ats_parse_rate}/>
           {/* <ProgressBar progress={analysis.ats_parse_rate} /> */}
           <h4>Great!</h4>
-          <p>We parsed {textAnalysis.ats_parse_rate}% of your resume successfully using an industry-leading ATS.</p>
+          <p>We parsed {analysis.ats_parse_rate}% of your resume successfully using an industry-leading ATS.</p>
         </AnalysisSection>
 
 
-        {textAnalysis.analysis.map((item, index) => (
+        {analysis.analysis.map((item, index) => (
           <AnalysisSection key={index}>
             <h3 style={{textTransform:"uppercase"}}>
               {categoryIcons[item.category]} {item.category}
@@ -152,7 +208,7 @@ const ResumeAnalyzeResult = ({textAnalysis}) => {
             <p><strong>Suggestions:</strong></p>
             <p>{item.suggestions}</p>
           </AnalysisSection>
-        ))}
+        ))} 
 
 
       </AnalysisPanel>
@@ -160,4 +216,4 @@ const ResumeAnalyzeResult = ({textAnalysis}) => {
   );
 };
 
-export default ResumeAnalyzeResult;
+export default ResumeAnalyzeResultDemo;
