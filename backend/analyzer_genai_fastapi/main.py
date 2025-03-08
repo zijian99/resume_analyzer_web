@@ -63,6 +63,15 @@ def extract_text_from_docx(file):
 
 
 
+# OLD PROMPT, SAVED FOR REFERENCE PURPOSE
+# """
+#         You are an AI resume reviewer that evaluates resumes based on clarity, relevance, and effectiveness for job applications. 
+#         Analyze the following resume and provide structured feedback in **JSON format** with these fields:
+
+#         1 **score**: A rating from 0 to 100 based on resume quality.
+#         2 **feedback**: Strengths of the resume.
+#         3 **suggestions**: Areas for improvement
+#         """
 
 
 
@@ -72,12 +81,29 @@ def analyze_resume_with_ai(text):
 
     # sys_instruct="You are an expert resume reviewer. Your task is to review the resume."
     sys_instruct=f"""
-        You are an AI resume reviewer that evaluates resumes based on clarity, relevance, and effectiveness for job applications. 
-        Analyze the following resume and provide structured feedback in **JSON format** with these fields:
+            You are an AI resume reviewer that evaluates resumes based on clarity, relevance, and effectiveness for job applications.  
+            Analyze the following resume and provide structured feedback in **valid JSON format** with these fields:
 
-        1 **score**: A rating from 0 to 100 based on resume quality.
-        2 **feedback**: Strengths of the resume.
-        3 **suggestions**: Areas for improvement
+            1. **score**: A rating from 0 to 100 based on the overall resume quality.
+            2. **content_score**: A rating from 0 to 100 for resume content quality.
+            3. **format_score**: A rating from 0 to 100 for formatting consistency.
+            4. **sections_score**: A rating from 0 to 100 for completeness of necessary sections.
+            5. **skills_score**: A rating from 0 to 100 for how well skills are presented.
+            6. **ats_parse_rate**: A percentage (0-100) indicating how well the resume can be parsed by an ATS.
+            7. **analysis**: A list of **exactly five** structured feedback items, each with:
+            - **category**: One of the following five:
+                - "Content Suggestions"
+                - "Spelling & Grammar"
+                - "Resume Length"
+                - "Personal Details"
+                - "Formatting Tips"
+            - **feedback**: A short statement on what the resume does well in this category.
+            - **suggestions**: Actionable advice on how to improve.
+
+            💡 **Important Rules:**
+            - Always include **all five categories**, even if no issues are found.
+            - Do not analyze any extra categories.
+            - Ensure the response is **valid JSON** with correct syntax.
         """
     response = client.models.generate_content(
         model="gemini-2.0-flash",
@@ -85,32 +111,58 @@ def analyze_resume_with_ai(text):
             system_instruction=sys_instruct),
         contents=[text]
     )
-    # print(response)
+    print(response)
 
     # Extract raw response text
     raw_text = response.candidates[0].content.parts[0].text
-
+    print(raw_text)
     # Remove markdown ```json and ``` from the response
     json_text = raw_text.strip("```json\n").strip("```")
+    print(json_text)
+    
+     # Parse the JSON string into a dictionary
+    try:
+        resume_analysis = json.loads(json_text)
+    except json.JSONDecodeError:
+        print("Error: Failed to parse JSON")
+        return None
 
-    # Parse the JSON string into a dictionary
-    resume_analysis = json.loads(json_text)
+    print(resume_analysis)
+    # Print overall score
+    print(f"Overall Score: {resume_analysis['score']}")
+    print(f"Content Score: {resume_analysis['content_score']}")
+    print(f"Format Score: {resume_analysis['format_score']}")
+    print(f"Sections Score: {resume_analysis['sections_score']}")
+    print(f"Skills Score: {resume_analysis['skills_score']}")
+    print(f"ATS Parse Rate: {resume_analysis['ats_parse_rate']}%")
+    print("\n--- Resume Analysis ---\n")
 
-    # Extract individual components
-    score = resume_analysis["score"]
-    feedback = resume_analysis["feedback"]
-    suggestions = resume_analysis["suggestions"]
+    # Print each category with feedback and suggestions
+    for item in resume_analysis["analysis"]:
+        print(f"Category: {item['category']}")
+        print(f"  Feedback: {item['feedback']}")
+        print(f"  Suggestions: {item['suggestions']}\n")
 
-    # Print results
-    print(f"Score: {score}")
-    print(f"Feedback: {feedback}")
-    print("Suggestions:")
-    for suggestion in suggestions:
-        print(f"- {suggestion}")
+    return resume_analysis  # Return the JSON string if needed
+
+    # # Parse the JSON string into a dictionary
+    # resume_analysis = json.loads(json_text)
+    # print(resume_analysis)
+
+    # # Extract individual components
+    # score = resume_analysis["score"]
+    # feedback = resume_analysis["feedback"]
+    # suggestions = resume_analysis["suggestions"]
+
+    # # Print results
+    # print(f"Score: {score}")
+    # print(f"Feedback: {feedback}")
+    # print("Suggestions:")
+    # for suggestion in suggestions:
+    #     print(f"- {suggestion}")
 
     
-    return resume_analysis
-    # return response
+    # return resume_analysis
 
 
 # def analyze_resume_with_ai(text):
