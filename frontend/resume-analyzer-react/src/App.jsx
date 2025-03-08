@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Layout from './pages/Layout';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from './pages/PageLayout/Layout';
 import Landing from './pages/Landing';
 import Pricing from './pages/Pricing';
 import Login from './pages/Login';
@@ -10,7 +9,7 @@ import About from './pages/About';
 import Home from './pages/Home';
 import ScrollToTop from './components/ScrolltoTop';
 import GrammarChecker from './pages/GrammarChecker';
-import LayoutMain from './pages/LayoutMain';
+import LayoutMain from './pages/PageLayout/LayoutMain';
 import ResumeAnalyzer from './pages/ResumeAnalyzer';
 import { useNavigate } from 'react-router-dom';
 import MobileDownload from './pages/MobileDownload';

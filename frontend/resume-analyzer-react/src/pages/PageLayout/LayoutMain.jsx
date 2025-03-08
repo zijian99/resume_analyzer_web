@@ -1,9 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar/Navbar'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import Footer from '../components/Footer';
-import NavbarMain from '../components/Navbar/NavbarMain';
+import Footer from '../../components/Footer';
+import NavbarMain from '../../components/NavbarComponent/NavbarMain';
+ 
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;

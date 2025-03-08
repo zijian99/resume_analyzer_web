@@ -1,8 +1,8 @@
 import React from 'react'
-import Navbar from '../components/Navbar/Navbar'
+import Navbar from '../../components/NavbarComponent/Navbar';
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import Footer from '../components/Footer';
+import Footer from '../../components/Footer';
 
 const Container = styled.div`
   display: flex;

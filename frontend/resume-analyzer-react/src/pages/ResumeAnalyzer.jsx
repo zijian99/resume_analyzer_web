@@ -71,30 +71,6 @@ const ProgressContainer = styled.div`
 `;
 
 
-const ReturnButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 8px; /* Space between icon and text */
-  background: white;
-  color: black;
-  border: 2px solid black;
-  padding: 10px 16px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 10px;
-  margin-left: -20px;
-
-  &:hover {
-    background: #5f30e2;
-    color: white;
-    border-color: #5f30e2;
-  }
-`;
-
-
 
 const ProgressBar = styled.div`
   width: ${(props) => props.progress}%;
@@ -249,6 +225,9 @@ const ResumeAnalyzer = () => {
        <img style={{width:"100px", height:"100px"}} src={loadingGIF} alt=""/>
       </LoadingScreen>
     )}
+
+
+
     {!loading &&
     <PageContainer>
       {/* Left Side - Resume Score Analysis */}
@@ -273,6 +252,8 @@ const ResumeAnalyzer = () => {
           </ResultContainer>
         )}
       </AnalysisPanel>
+
+
 
       {/* Right Side - PDF Viewer with Progress Bar */}
       {!analyzed && <ResumeViewerPanel>
