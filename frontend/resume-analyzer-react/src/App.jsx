@@ -15,6 +15,9 @@ import { useNavigate } from 'react-router-dom';
 import MobileDownload from './pages/MobileDownload';
 import RedirectIfMobile from './components/RedirectIfMobile';
 import ResumeAnalyzeResult from './components/ResumeAnalyzerComponent/ResumeAnalyzeResult';
+import Help from "./pages/Help";
+import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
 
 function App() {
 
@@ -33,6 +36,9 @@ function App() {
             <Route path="/home" element={<Home/>} />
             <Route path="/resumeanalyzer" element={<ResumeAnalyzer/>} />
             <Route path="/grammarchecker" element={<GrammarChecker/>} />
+            <Route path="/help" element={<Help/>} />
+            <Route path="/settings" element={<Settings/>} />
+            <Route path="/profile" element={<Profile/>} />
             <Route path="/anademo" element={<ResumeAnalyzeResult />} />
           </Route> 
             {/* element is to make that everything inside the<Route> has the <Layout> component */}

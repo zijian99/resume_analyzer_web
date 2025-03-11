@@ -127,6 +127,22 @@ const DropdownItem = styled(NavLink)`
 
 const link = [
   {
+    page:"Home",
+    href:"/home",
+  },
+  // {
+  //   page:"Resume Analysis",
+  //   href:"/resumeanalyzer",
+  // },
+  // {
+  //   page:"Spelling & Grammar Checking",
+  //   href:"/grammarchecker",
+  // },
+
+];
+
+const serviceDropdownLinks = [
+  {
     page:"Resume Analysis",
     href:"/resumeanalyzer",
   },
@@ -134,7 +150,6 @@ const link = [
     page:"Spelling & Grammar Checking",
     href:"/grammarchecker",
   },
-
 ];
 
 const dropdownLinks = [
@@ -155,6 +170,25 @@ const dropdownLinks = [
 const NavbarMain = () => {
   const [active, setActive] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isServiceDropdownOpen, setServiceDropdownOpen] = useState(false);
+
+  const handleDropdown = () => {
+    setServiceDropdownOpen(false);
+    setDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleServiceDropdown = () => {
+    setDropdownOpen(false);
+    setServiceDropdownOpen(!isServiceDropdownOpen);
+  };
+
+  const handleNavigate = () => {
+    setDropdownOpen(false);
+    setServiceDropdownOpen(false);
+  };
+  
+
+
 
   return (
     <NavbarWrapper>
@@ -166,19 +200,33 @@ const NavbarMain = () => {
             activeclassname="active"
             key={link.page}
             to={link.href}
+            onClick={handleNavigate}
           >
             {link.page}
           </StyledNavLink>
         ))}
 
+        <DropdownContainer>
+          <DropdownButton onClick={handleServiceDropdown}>
+            Services ▼
+          </DropdownButton>
+          <DropdownMenu isOpen={isServiceDropdownOpen}>
+            {serviceDropdownLinks.map((link) => (
+              <DropdownItem key={link.page} to={link.href} onClick={handleNavigate}>
+                {link.page}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </DropdownContainer>
+
         {/* DROPDOWN MENU (Placed in between) */}
         <DropdownContainer>
-          <DropdownButton onClick={() => setDropdownOpen(!isDropdownOpen)}>
+          <DropdownButton onClick={handleDropdown}>
             More ▼
           </DropdownButton>
           <DropdownMenu isOpen={isDropdownOpen}>
             {dropdownLinks.map((link) => (
-              <DropdownItem key={link.page} to={link.href}>
+              <DropdownItem key={link.page} to={link.href} onClick={handleNavigate}>
                 {link.page}
               </DropdownItem>
             ))}
