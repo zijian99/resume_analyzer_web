@@ -2,12 +2,13 @@ import React, { useState,useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { GoArrowRight } from "react-icons/go";
 import styled from "styled-components";
-import main_gif from "../../src/assets/writing_expert.gif";
-import cat_gif from "../../src/assets/cat_gif.gif";
-import content1 from "../../src/assets/content1.gif";
-import content2 from "../../src/assets/content2.gif";
-import content3 from "../../src/assets/content3.gif";
-import content5 from "../../src/assets/content5.gif";
+import main_gif from "../assets/writing_expert.gif";
+import cat_gif from "../assets/cat_gif.gif";
+import content1 from "../assets/content1.gif";
+import content2 from "../assets/content2.gif";
+import content3 from "../assets/content3.gif";
+import content5 from "../assets/content5.gif";
+import content6 from "../assets/annual_report_example.jpg";
 import LogoCarousel from "../components/LogoCarousel";
 import PricingPlan from "../components/PricingPlan";
 import { AiOutlineDownload } from "react-icons/ai";
@@ -384,7 +385,7 @@ const Landing = () => {
         {/* FOURTH PART OF LANDING PAGE(SOME RANDOM CONTENT) */}
         <CardContainer>
           <RightSection>
-            <Image src="src/assets/annual_report_example.jpg" alt=""  />
+            <Image src={content6} alt=""  />
           </RightSection>
 
           <LeftSection>

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { AccountBox } from '../components/AuthComponent/AccountBox';
+import loginBg from "../assets/pic.jpg";
 
 const StyledDiv = styled.div`
   height: 2400px
@@ -30,7 +31,7 @@ const Login = () => {
   return (
     <LoginContainer>
         <div>
-          <LoginBackground src="src\assets\pic.jpg" alt="" />
+          <LoginBackground src={loginBg} alt="" />
         </div>
       <AccountBox/>
     </LoginContainer>

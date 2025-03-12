@@ -3,6 +3,8 @@ import AnnouncementBoard from '../components/AnnouncementComponent/AnnouncementB
 import AnnouncementMarquee from '../components/AnnouncementComponent/AnnouncementMarquee'
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import appPic1 from "../assets/resume_checker.png";
+import appPic2 from "../assets/content1.gif";
 
 
 
@@ -172,13 +174,13 @@ const Home = () => {
       </AnnoucementContainer>
       <CardContainer>
           <RightSection>
-            <Image src="src/assets/resume_checker.png" alt=""  />
+            <Image src={appPic1} alt=""  />
           </RightSection>
 
           <LeftSection>
             <ContentBlock>
               <HeaderText>Optimize Your Resume & Get More Interviews!</HeaderText>
-              <SmallText>Our AI-powered tool analyzes your resume and provides instant feedback to help you stand out in job applications.</SmallText>
+              <SmallText>Our AI -powered tool analyzes your resume and provides instant feedback to help you stand out in job applications.</SmallText>
             </ContentBlock>
             <StartButton to="/resumeanalyzer">
               Start Now to Optimize Your Resume!
@@ -198,7 +200,7 @@ const Home = () => {
           </LeftSection>
 
           <RightSection>
-            <Image src="src/assets/content1.gif" alt=""  />
+            <Image src={appPic2} alt=""  />
           </RightSection>
 
           

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import news1 from "../../assets/2.png";
+import news2 from "../../assets/news1.jpg";
+import news3 from "../../assets/news2.png";
 
 const slides = [
-  "src/assets/2.png",
-  "src/assets/news1.jpg",
-  "src/assets/news2.png",
+  news1,
+  news2,
+  news3,
 ];
 
 const Container = styled.div`
