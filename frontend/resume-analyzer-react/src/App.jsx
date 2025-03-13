@@ -18,6 +18,7 @@ import ResumeAnalyzeResult from './components/ResumeAnalyzerComponent/ResumeAnal
 import Help from "./pages/Help";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
+import AIChatbot from "./pages/AIChatbot";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
             <Route path="/home" element={<Home/>} />
             <Route path="/resumeanalyzer" element={<ResumeAnalyzer/>} />
             <Route path="/grammarchecker" element={<GrammarChecker/>} />
+            <Route path="/aichatbot" element={<AIChatbot/>} />
             <Route path="/help" element={<Help/>} />
             <Route path="/settings" element={<Settings/>} />
             <Route path="/profile" element={<Profile/>} />

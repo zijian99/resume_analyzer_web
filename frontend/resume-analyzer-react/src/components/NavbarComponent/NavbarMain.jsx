@@ -150,6 +150,10 @@ const serviceDropdownLinks = [
     page:"Spelling & Grammar Checking",
     href:"/grammarchecker",
   },
+  {
+    page:"AI Chatbot Advisor",
+    href:"/aichatbot",
+  },
 ];
 
 const dropdownLinks = [

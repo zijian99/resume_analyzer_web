@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import appPic1 from "../assets/resume_checker.png";
 import appPic2 from "../assets/content1.gif";
+import appPic3 from "../assets/chatbot.png";
 
 
 
@@ -202,8 +203,22 @@ const Home = () => {
           <RightSection>
             <Image src={appPic2} alt=""  />
           </RightSection>
+      </CardContainer>  
 
-          
+      <CardContainer>
+          <RightSection>
+            <Image src={appPic3} alt=""  />
+          </RightSection>
+
+          <LeftSection>
+            <ContentBlock>
+              <HeaderText>Get Your Career Advice from AI!</HeaderText>
+              <SmallText>Our AI Chatbot can give you any advice or suggestion on your career to help with your job seeking.</SmallText>
+            </ContentBlock>
+            <StartButton to="/aichatbot">
+              Chat with AI for Career Advices!
+            </StartButton>
+          </LeftSection>
       </CardContainer>  
 
 
