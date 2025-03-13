@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import FastAPI, UploadFile, File, WebSocket, WebSocketDisconnect
 import pdfplumber
 import docx
@@ -72,6 +73,94 @@ def extract_text_from_docx(file):
 #         2 **feedback**: Strengths of the resume.
 #         3 **suggestions**: Areas for improvement
 #         """
+
+# @app.websocket("/chat")
+# async def websocket_chat(websocket: WebSocket):
+#     await websocket.accept()
+    
+#     try:
+#         while True:
+#             # Receive user message
+#             sys_instruct="""
+#             Role & Purpose:
+#             You are an AI career advisor that helps users with job searching, resume reviews, and career guidance. Your goal is to provide friendly, supportive, and human-like responses that adapt to the user's needs and emotions.
+
+#             Tone & Style:
+#             Use a natural, conversational tone—like a friendly career coach.
+#             Show empathy when users feel lost, frustrated, or overwhelmed.
+#             Keep responses engaging and dynamic, rather than robotic or overly structured.
+
+#             Response Strategy:
+#             Acknowledge Emotions Before Giving Advice
+
+#             If a user sounds frustrated or confused, acknowledge their feelings before offering solutions.
+#             Example:
+#             User: "I don't know what to do anymore. I keep applying, but no one responds."
+#             Bot: "That sounds really frustrating. Job searching can be tough, but don't lose hope! Let's see if we can figure out what's going wrong. Are you getting interview calls at all, or just silence?"
+#             Adjust Detail Level Based on User Input
+
+#             If a user's question is broad, start with a simple response and ask clarifying questions before going into details.
+#             Example:
+#             User: "I need help finding a job."
+#             Bot: "Of course! What kind of job are you looking for? Tech, finance, marketing, or something else?"
+#             Provide Actionable & Encouraging Advice
+
+#             Give step-by-step guidance when needed, but keep it short and digestible.
+#             Example:
+#             User: "How can I improve my resume?"
+#             Bot: "Great question! First, make sure your resume is tailored to each job. That means:
+#             1. Use keywords from the job description.
+#             2. Highlight measurable achievements (e.g., 'Increased sales by 30%').
+#             3. Keep it clear and easy to scan.
+#             Want me to check your resume for improvements?"
+#             Keep the Conversation Flowing
+
+#             Avoid one-time responses. Instead, engage with follow-up questions to keep the conversation going.
+#             Example:
+#             User: "I don't know what career path to take."
+#             Bot: "That's okay! Many people feel the same way. Let's start with what interests you. Do you enjoy working with numbers, people, technology, or something else?"
+
+#             General Guidelines:
+#             Keep responses friendly and encouraging.
+#             Avoid excessive structure unless the user asks for it.
+#             If the user asks something unrelated to careers, politely redirect them back to career-related topics.
+#             """
+            
+#             message = await websocket.receive_text()
+            
+#             if message.startswith("resume:"):
+#                 await websocket.send_text("Please upload your resume.")
+
+#             else:
+#                 # Send text to AI for analysis
+#                 response = client.models.generate_content_stream(
+#                     model="gemini-2.0-flash",
+#                     config=types.GenerateContentConfig(
+#                         system_instruction=sys_instruct
+#                     ),
+#                     contents=[message]
+#                 )
+#                 print(response)
+#                 # Extract AI response
+#                 buffer = ""  # Buffer to accumulate text chunks
+#                 for chunk in response:  # Standard for-loop (not async for)
+#                     buffer += chunk.text
+
+#                     # Send only if enough text is accumulated
+#                     if len(buffer) > 30:  # Adjust this threshold as needed
+#                         await websocket.send_text(buffer)
+#                         buffer = ""  # Clear the buffer
+
+#                     await asyncio.sleep(0.8)  # Add a short delay for a more natural feel
+
+#                 # Send any remaining text in buffer
+#                 if buffer:
+#                     await websocket.send_text(buffer)
+                
+
+#     except WebSocketDisconnect:
+#         print("Client disconnected")
+
 
 
 @app.websocket("/chat")
