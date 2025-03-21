@@ -20,15 +20,15 @@ const BoxContainer = styled.div`
 
   min-width: 50%;
   min-height: 90vh;
-  height: 90vh;
+  height: 100vh;
   box-sizing: border-box;
   
   // background-color: grey;
-  border-radius: 19px;
+  // border-radius: 19px;
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   
   padding: 2em 4em;
-  margin: 0.5em;
+  // margin: 0.5em;
 
   overflow: hidden;
 `;
@@ -168,9 +168,9 @@ const BackDrop = styled(motion.div)`
 
 const backdropVariants = {
   expanded: {
-    width: "233%",
-    height: "1050px",
-    // borderRadius: "20%",
+    width: "255%",
+    height: "1250px",
+    borderRadius: "5%",
     // transform: "rotate(60deg)",
   },
   collapsed: {
