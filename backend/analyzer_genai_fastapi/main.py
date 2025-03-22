@@ -27,10 +27,10 @@ print("Google API Key:", GOOGLE_API_KEY)
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change to specific frontend URL in production
+    allow_origins=["*"],  # Change this in production
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],  # Explicitly allow OPTIONS
+    allow_headers=["*"],  
 )
 
 @app.get("/")
@@ -219,7 +219,7 @@ async def chat(request: ChatRequest):
         # Send user message to Gemini AI
         response = client.models.generate_content(
             model="gemini-2.0-flash",
-            config=types.GenerateContentConfig(system_instruction=sys_instruct),
+            config=types.GenerateContentConfig(system_instruction=sys_instruction),
             contents=[request.message]
         )
 
