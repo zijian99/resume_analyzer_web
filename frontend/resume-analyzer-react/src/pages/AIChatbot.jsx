@@ -138,7 +138,7 @@ const AIChatbot = () => {
   // Scroll to bottom whenever messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [typing]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -151,6 +151,10 @@ const AIChatbot = () => {
     if (input.trim()) {
       const userMessage = { text: input, isUser: true };
       setMessages((prev) => [...prev, userMessage]);
+      // Ensure scrolling happens after state updates
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
       ws.current.send(input);
       setInput('');
     }
@@ -183,6 +187,7 @@ const AIChatbot = () => {
           onKeyDown={handleKeyDown}
         />
         <SendButton onClick={sendMessage}>📩</SendButton>
+        
       </InputContainer>
     </ChatContainer>
   );

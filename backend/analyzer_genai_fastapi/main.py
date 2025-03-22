@@ -12,8 +12,8 @@ from dotenv import load_dotenv
 import os
 from fastapi import HTTPException
 from pydantic import BaseModel
-import language_tool_python
-from spellchecker import SpellChecker
+# import language_tool_python
+# from spellchecker import SpellChecker
 
 # Load environment variables from .env file
 load_dotenv()
