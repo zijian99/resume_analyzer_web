@@ -219,7 +219,7 @@ async def chat(request: ChatRequest):
         # Send user message to Gemini AI
         response = client.models.generate_content(
             model="gemini-2.0-flash",
-            config=types.GenerateContentConfig(system_instruction=sys_instruction),
+            config=types.GenerateContentConfig(system_instruction=sys_instruct),
             contents=[request.message]
         )
 
