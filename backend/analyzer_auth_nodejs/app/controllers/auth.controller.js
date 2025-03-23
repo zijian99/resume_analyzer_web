@@ -45,9 +45,10 @@ exports.signup = async (req, res) => {
   }
 };
 
+
 exports.signin = async (req, res) => {
   try {
-    const user = await User.findOne({ username: req.body.username })
+    const user = await User.findOne({ email: req.body.email })
       .populate("roles", "-__v");
 
     if (!user) {
@@ -63,24 +64,11 @@ exports.signin = async (req, res) => {
       });
     }
 
-    // const token = jwt.sign(
-    //   { id: user.id },
-    //   config.secret,
-    //   {
-    //     algorithm: 'HS256',
-    //     allowInsecureKeySizes: true,
-    //     expiresIn: 86400 // 24 hours
-    //   }
-    // );
     const token = jwt.sign(
-        { id: user.id },
-        process.env.JWT_SECRET,
-        {
-          algorithm: 'HS256',
-          allowInsecureKeySizes: true,
-          expiresIn: 86400 // 24 hours
-        }
-      );
+      { id: user.id },
+      process.env.JWT_SECRET,
+      { algorithm: 'HS256', expiresIn: 86400 } // 24 hours
+    );
 
     const authorities = user.roles.map(role => "ROLE_" + role.name.toUpperCase());
 
@@ -95,3 +83,54 @@ exports.signin = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// exports.signin = async (req, res) => {
+//   try {
+//     const user = await User.findOne({ username: req.body.username })
+//       .populate("roles", "-__v");
+
+//     if (!user) {
+//       return res.status(404).json({ message: "User Not found." });
+//     }
+
+//     const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+
+//     if (!passwordIsValid) {
+//       return res.status(401).json({
+//         accessToken: null,
+//         message: "Invalid Password!"
+//       });
+//     }
+
+//     // const token = jwt.sign(
+//     //   { id: user.id },
+//     //   config.secret,
+//     //   {
+//     //     algorithm: 'HS256',
+//     //     allowInsecureKeySizes: true,
+//     //     expiresIn: 86400 // 24 hours
+//     //   }
+//     // );
+//     const token = jwt.sign(
+//         { id: user.id },
+//         process.env.JWT_SECRET,
+//         {
+//           algorithm: 'HS256',
+//           allowInsecureKeySizes: true,
+//           expiresIn: 86400 // 24 hours
+//         }
+//       );
+
+//     const authorities = user.roles.map(role => "ROLE_" + role.name.toUpperCase());
+
+//     res.status(200).json({
+//       id: user._id,
+//       username: user.username,
+//       email: user.email,
+//       roles: authorities,
+//       accessToken: token
+//     });
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };

@@ -19,33 +19,62 @@ export function LoginForm(props) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
+  const API_URL = "https://resume-analyzer-backend-auth-nodejs.onrender.com/api/auth/signin";
+
   // Handle login submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null); // Reset error state
-    navigate("/home");
 
-    // try {
-    //   const response = await fetch("http://your-backend-api.com/auth/login", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ email, password }),
-    //   });
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: email, password }),
+      });
 
-    //   const data = await response.json();
+      const data = await response.json();
 
-    //   if (response.ok) {
-    //     // Store token if needed
-    //     localStorage.setItem("token", data.token);
-    //     // Redirect to home page
-    //     navigate("/home");
-    //   } else {
-    //     setError(data.message || "Invalid login credentials");
-    //   }
-    // } catch (error) {
-    //   setError("Something went wrong. Please try again.");
-    // }
+      if (response.ok) {
+        // Store token in localStorage
+        localStorage.setItem("token", data.accessToken);
+        // Redirect to home page
+        navigate("/home");
+      } else {
+        setError(data.message || "Invalid login credentials");
+      }
+    } catch (error) {
+      setError("Something went wrong. Please try again.");
+    }
   };
+
+  // // Handle login submission
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setError(null); // Reset error state
+  //   navigate("/home");
+
+  //   // try {
+  //   //   const response = await fetch("http://your-backend-api.com/auth/login", {
+  //   //     method: "POST",
+  //   //     headers: { "Content-Type": "application/json" },
+  //   //     body: JSON.stringify({ email, password }),
+  //   //   });
+
+  //   //   const data = await response.json();
+
+  //   //   if (response.ok) {
+  //   //     // Store token if needed
+  //   //     localStorage.setItem("token", data.token);
+  //   //     // Redirect to home page
+  //   //     navigate("/home");
+  //   //   } else {
+  //   //     setError(data.message || "Invalid login credentials");
+  //   //   }
+  //   // } catch (error) {
+  //   //   setError("Something went wrong. Please try again.");
+  //   // }
+  // };
 
   return (
     <BoxContainer>

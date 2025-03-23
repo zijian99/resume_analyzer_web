@@ -19,35 +19,73 @@ export function RegisterForm(props) {
   const [success, setSuccess] = useState(null);
   const [isRegistered, setIsRegistered] = useState(false)
 
+  const API_URL = "https://resume-analyzer-backend-auth-nodejs.onrender.com/api/auth/signup";
+
+
   const handleRegister = async (e) => {
-    // e.preventDefault();
-    // setError(null);
-    // setSuccess(null);
-    setIsRegistered(true);
-    setSuccess("Registration successful! You can now sign in.");
-    // if (password !== confirmPassword) {
-    //   setError("Passwords do not match!");
-    //   return;
-    // }
-
-    // try {
-    //   const response = await fetch("http://localhost:8080/auth/register", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ fullName, email, password }),
-    //   });
-
-    //   const data = await response.json();
-
-    //   if (response.ok) {
-    //     setSuccess("Registration successful! You can now sign in.");
-    //   } else {
-    //     setError(data.message || "Registration failed.");
-    //   }
-    // } catch (err) {
-    //   setError("Something went wrong. Please try again.");
-    // }
+    e.preventDefault(); // Prevent default form submission
+    setError(null);
+    setSuccess(null);
+  
+    if (password !== confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+  
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          username: fullName, // Assuming fullName is the username
+          email, 
+          password 
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        setSuccess("Registration successful! You can now sign in.");
+        setIsRegistered(true);
+      } else {
+        setError(data.message || "Registration failed.");
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    }
   };
+  
+
+  // const handleRegister = async (e) => {
+  //   // e.preventDefault();
+  //   // setError(null);
+  //   // setSuccess(null);
+  //   setIsRegistered(true);
+  //   setSuccess("Registration successful! You can now sign in.");
+  //   // if (password !== confirmPassword) {
+  //   //   setError("Passwords do not match!");
+  //   //   return;
+  //   // }
+
+  //   // try {
+  //   //   const response = await fetch("http://localhost:8080/auth/register", {
+  //   //     method: "POST",
+  //   //     headers: { "Content-Type": "application/json" },
+  //   //     body: JSON.stringify({ fullName, email, password }),
+  //   //   });
+
+  //   //   const data = await response.json();
+
+  //   //   if (response.ok) {
+  //   //     setSuccess("Registration successful! You can now sign in.");
+  //   //   } else {
+  //   //     setError(data.message || "Registration failed.");
+  //   //   }
+  //   // } catch (err) {
+  //   //   setError("Something went wrong. Please try again.");
+  //   // }
+  // };
 
   return (
     <BoxContainer>
