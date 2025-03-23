@@ -4,8 +4,10 @@ const cors = require("cors");
 
 const app = express();
 
+
+// Change the origin here to our frontend website url so that only API call from there is accepted when deployment if required
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "*"
 };
 
 app.use(cors(corsOptions));
