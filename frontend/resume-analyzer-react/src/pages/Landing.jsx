@@ -41,7 +41,7 @@ const CardContainer = styled.div`
   // background-color: purple;
 
   // margin-bottom: 0.5em;
-  padding: 5em 5em;
+  padding: 2em 5em;
 `;
 
 const CardContainer1 = styled.div`

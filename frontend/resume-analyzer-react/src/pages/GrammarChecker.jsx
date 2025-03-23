@@ -126,7 +126,9 @@ const GrammarChecker = () => {
     const startTime = Date.now(); // Start timing
     
     try {
-      const response = await axios.post("http://127.0.0.1:8000/check_text/", { text: userText });
+      // CHANGE LOCAL/LIVE HERE
+      // const response = await axios.post("http://127.0.0.1:8000/check_text/", { text: userText });
+      const response = await axios.post("https://resume-analyzer-genai-fastapi.onrender.com/check_text/", { text: userText });
       
       const elapsedTime = Date.now() - startTime;
       const delay = Math.max(1000 - elapsedTime, 0); // Ensure at least 1s total delay

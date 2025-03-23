@@ -119,21 +119,22 @@ const AIChatbot = () => {
   const [typing, setTyping] = useState(false);
   const ws = useRef(null);
   const messagesEndRef = useRef(null); // Ref for scrolling to bottom
+  const API_URL = "https://resume-analyzer-genai-fastapi.onrender.com/httpchat";
 
-  useEffect(() => {
-    ws.current = new WebSocket('ws://localhost:8000/chat');
+  // useEffect(() => {
+  //   ws.current = new WebSocket('ws://localhost:8000/chat');
 
-    ws.current.onmessage = (event) => {
-      setTyping(true); // Show "Typing..." for 1 second before responding
-      setTimeout(() => {
-        setTyping(false);
-        const botMessage = { text: event.data, isUser: false };
-        setMessages((prev) => [...prev, botMessage]);
-      }, 1000);
-    };
+  //   ws.current.onmessage = (event) => {
+  //     setTyping(true); // Show "Typing..." for 1 second before responding
+  //     setTimeout(() => {
+  //       setTyping(false);
+  //       const botMessage = { text: event.data, isUser: false };
+  //       setMessages((prev) => [...prev, botMessage]);
+  //     }, 1000);
+  //   };
 
-    return () => ws.current.close();
-  }, []);
+  //   return () => ws.current.close();
+  // }, []);
 
   // Scroll to bottom whenever messages change
   useEffect(() => {
@@ -143,7 +144,8 @@ const AIChatbot = () => {
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      sendMessage();
+      // sendMessage();
+      sendMessageHttp();
     }
   };
 
@@ -157,6 +159,36 @@ const AIChatbot = () => {
       }, 100);
       ws.current.send(input);
       setInput('');
+    }
+  };
+
+  const sendMessageHttp = async () => {
+    if (input.trim()) {
+      const userMessage = { text: input, isUser: true };
+      setMessages((prev) => [...prev, userMessage]);
+      setInput('');
+      setTyping(true);
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: input }),
+        });
+        setTyping(true);
+        const data = await response.json();
+        setTyping(false);
+
+        if (response.ok) {
+          const botMessage = { text: data.response, isUser: false };
+          setMessages((prev) => [...prev, botMessage]);
+        } else {
+          setMessages((prev) => [...prev, { text: "Error: Failed to get a response.", isUser: false }]);
+        }
+      } catch (error) {
+        setTyping(false);
+        setMessages((prev) => [...prev, { text: "Error: Unable to connect to AI service.", isUser: false }]);
+      }
     }
   };
 
@@ -186,7 +218,7 @@ const AIChatbot = () => {
           placeholder="Type a message..."
           onKeyDown={handleKeyDown}
         />
-        <SendButton onClick={sendMessage}>📩</SendButton>
+        <SendButton onClick={sendMessageHttp}>📩</SendButton>
         
       </InputContainer>
     </ChatContainer>

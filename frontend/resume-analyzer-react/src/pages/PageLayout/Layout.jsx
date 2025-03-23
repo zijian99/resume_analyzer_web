@@ -11,13 +11,21 @@ const Container = styled.div`
   height: 100vh;
 `;
 
+const MainContent = styled.div`
+  // flex: 1;
+  padding-top: 8vh ; /* Should match or be slightly larger than navbar height */
+`;
+
 
 const Layout = () => {
 
   return (
     <Container>
         <Navbar />
-        <Outlet />
+        <MainContent>
+          <Outlet />
+        </MainContent>
+        
         <Footer/>
     </Container>
   );

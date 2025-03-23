@@ -210,10 +210,15 @@ const ResumeAnalyzer = () => {
     try {
       const formData = new FormData();
       formData.append("file", file.raw); // Ensure it's the actual File object
-  
-      const result = await axios.post("http://127.0.0.1:8000/upload_resume/", formData, {
+      
+      // CHANGE LOCAL/LIVE HERE
+      // const result = await axios.post("http://127.0.0.1:8000/upload_resume/", formData, {
+      //   headers: { "Accept": "application/json" },
+      // });
+      const result = await axios.post("https://resume-analyzer-genai-fastapi.onrender.com/upload_resume/", formData, {
         headers: { "Accept": "application/json" },
       });
+      
   
       setLoading(false);
   
