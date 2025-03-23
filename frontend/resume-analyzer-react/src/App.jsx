@@ -7,7 +7,7 @@ import Register from './pages/Register';
 import GlobalStyles from './styles/Global.styled';
 import About from './pages/About';
 import Home from './pages/Home';
-import ScrollToTop from './components/ScrolltoTop';
+import ScrollToTop from './components/ScrollToTop';
 import GrammarChecker from './pages/GrammarChecker';
 import LayoutMain from './pages/PageLayout/LayoutMain';
 import ResumeAnalyzer from './pages/ResumeAnalyzer';

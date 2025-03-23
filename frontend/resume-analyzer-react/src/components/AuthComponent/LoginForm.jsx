@@ -30,7 +30,7 @@ export function LoginForm(props) {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: email, password }),
+        body: JSON.stringify({ email: email, password }),
       });
 
       const data = await response.json();
