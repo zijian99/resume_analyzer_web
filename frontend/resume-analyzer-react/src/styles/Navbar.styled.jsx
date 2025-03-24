@@ -1,28 +1,28 @@
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+// // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { NavLink } from "react-router-dom";
+// import styled from "styled-components";
 
-const ClickableImg = styled(NavLink)`
-  display: flex;
-  align-items: center;
-  align-self: start;
-  justify-content: center;
+// const ClickableImg = styled(NavLink)`
+//   display: flex;
+//   align-items: center;
+//   align-self: start;
+//   justify-content: center;
 
-  width: 5%; 
-  cursor: pointer;
-  text-decoration: none;
-  font-weight: bold;
+//   width: 5%; 
+//   cursor: pointer;
+//   text-decoration: none;
+//   font-weight: bold;
 
-  color: inherit;
+//   color: inherit;
 
-  &:hover {
-    opacity: 0.9;
-  }
-  @media (max-width: 704px) {
-    display: block;
-    margin: 2rem auto;
-  }
-`;
+//   &:hover {
+//     opacity: 0.9;
+//   }
+//   @media (max-width: 704px) {
+//     display: block;
+//     margin: 2rem auto;
+//   }
+// `;
 
 // const NavbarWrapper = styled.nav`
 //   display: flex;
@@ -107,9 +107,9 @@ const ClickableImg = styled(NavLink)`
 // `;
  
 
-export {
-    ClickableImg,
-    // NavbarWrapper,
-    // NavLinkWrapper,
-    // StyledNavLink,
-};
+// export {
+//     ClickableImg,
+//     // NavbarWrapper,
+//     // NavLinkWrapper,
+//     // StyledNavLink,
+// };

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CONTAINER
@@ -84,7 +84,7 @@ export const Input = styled.input`
 
 export const SubmitButton = styled.button`
   width: 100%;
-  
+  height: 40px;
   border: none;
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
@@ -114,4 +114,21 @@ export const SubmitButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
+`;
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+export const Spinner = styled.div`
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: ${spin} 0.6s linear infinite;
+  display: inline-flex; /* Makes sure it aligns like text */
+  align-items: center;
+  justify-content: center;
 `;

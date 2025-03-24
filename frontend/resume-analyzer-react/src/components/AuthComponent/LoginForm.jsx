@@ -7,6 +7,7 @@ import {
   Input,
   MutedLink,
   SubmitButton,
+  Spinner,
 } from "./AccountBoxStyles";
 import { AccountContext } from "./AccountContext";
 
@@ -18,13 +19,15 @@ export function LoginForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(false); // Loading state
+  
   const API_URL = "https://resume-analyzer-backend-auth-nodejs.onrender.com/api/auth/signin";
 
   // Handle login submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null); // Reset error state
+    setLoading(true);
 
     try {
       const response = await fetch(API_URL, {
@@ -45,6 +48,8 @@ export function LoginForm(props) {
       }
     } catch (error) {
       setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -94,7 +99,9 @@ export function LoginForm(props) {
           // required
         />
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <SubmitButton type="submit">Sign In</SubmitButton>
+        <SubmitButton type="submit" disabled={loading}>
+          {loading ? <Spinner /> : "Sign In"}
+        </SubmitButton>
       </FormContainer>
 
       <MutedLink href="#">Forgot your password?</MutedLink>
