@@ -46,29 +46,6 @@ const NavLinkWrapper = styled.div`
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // COMPONENT
 
-const ClickableImg = styled(NavLink)`
-  display: flex;
-  align-items: center;
-  align-self: start;
-  justify-content: center;
-
-  width: 5%; 
-  cursor: pointer;
-
-  text-decoration: none;
-  font-weight: bold;
-
-  color: inherit;
-
-  &:hover {
-    opacity: 0.9;
-  }
-  @media (max-width: 704px) {
-    display: block;
-    margin: 2rem auto;
-  }
-`;
-
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   font-weight: bold;
@@ -81,8 +58,6 @@ const StyledNavLink = styled(NavLink)`
   &:last-child {
     border-radius: 10px;
 
-    //background: #007dfc;
-    // background: #3cc9b4;
     background: #5f30e2;
     color: white;
 
@@ -92,9 +67,6 @@ const StyledNavLink = styled(NavLink)`
       color: white;
       opacity: 0.8;
     }
-    // &.${(props) => props.activeclassname} {
-    //   color: blue;
-    // }
   }
 
   &.${(props) => props.activeclassname} {

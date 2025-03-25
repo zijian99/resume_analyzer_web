@@ -1,12 +1,14 @@
-// const config = require("../config/auth.config");
+// Imports
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 
+
+// Function for signing up with username, email and password
 exports.signup = async (req, res) => {
   try {
     const hashedPassword = bcrypt.hashSync(req.body.password, 8);
@@ -46,6 +48,7 @@ exports.signup = async (req, res) => {
 };
 
 
+// Function for signing in with email and password
 exports.signin = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email })

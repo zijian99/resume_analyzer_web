@@ -16,6 +16,8 @@ const pageVariants = {
   exit: { opacity: 0, x: "100vw", transition: { duration: 0.5 } },
 };
 
+
+// For animation transition between page(NOT USING)
 const Page = ({ children }) => {
   return (
     <PageWrapper

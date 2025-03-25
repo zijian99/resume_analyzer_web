@@ -29,20 +29,7 @@ const ProgressBarContainer = styled.div`
   background: #ddd;
   border-radius: 10px;
   overflow: hidden;
-  // margin-top: 10px;
   position: relative;
-
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
-
-  //   width: 300px; /* Set a fixed width */
-  // height: 20px;
-  // background: #ddd;
-  // border-radius: 10px;
-  // overflow: hidden;
-  // position: relative;
 `;
 
 const ScoreFill = styled.div`
@@ -50,11 +37,6 @@ const ScoreFill = styled.div`
   height: 100%;
   background: ${(props) => getColor(props.score)};
   transition: width 1.5s ease-in-out;
-
-  //   height: 100%;
-  // width: ${(props) => props.width}%;
-  // background: ${(props) => getColor(props.score)};
-  // transition: width 1.5s ease-in-out;
 `;
 
 const ScoreText = styled.div`
@@ -64,13 +46,6 @@ const ScoreText = styled.div`
   text-align: center;
   margin-top: 5px;
   animation: ${fadeIn} 1s ease-in-out;
-
-  //   font-size: 18px;
-  // font-weight: bold;
-  // color: #333;
-  // text-align: center;
-  // margin-top: 5px;
-  // animation: ${fadeIn} 1s ease-in-out;
 `;
 
 // Score Progress Bar Component

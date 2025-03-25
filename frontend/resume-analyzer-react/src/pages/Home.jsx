@@ -8,6 +8,10 @@ import appPic2 from "../assets/content1.gif";
 import appPic3 from "../assets/chatbot.png";
 
 
+const HomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const CardContainer = styled.div`
   display: flex;
@@ -16,96 +20,67 @@ const CardContainer = styled.div`
   justify-content: space-between;
   height: 90vh;
 
-  // min-height: 100vh; /* Each section takes full viewport height */
-
-  // background-color: purple;
-
-  // margin-bottom: 0.5em;
   padding: 0em 5em;
 `;
 
+const AnnoucementContainer = styled.div`
+  height: 70vh;
+  background: radial-gradient(circle at top, #111e40 10%, #0a0027 50%, #050017 100%);
 
-
-const HeaderText = styled.h2`
-  // z-index: 10;
-
-  font-size: 48px;
-  font-weight: 600;
-  // line-height: 1.24;
-
-  // color: #fff; 
-  color:black;
-
-  // margin-bottom: 1em;
+  padding: 2em;
 `;
 
-const SmallText = styled.h5`
-    z-index: 10;
-
-  font-weight: 500;
-  font-size: 24px;
-
-  // color: #fff;
-  color:black;
-
-  margin: 0;
-  margin-top: 1em;
-`;
-
-
-
-
-
-
-
-const LeftSection = styled.div`
+const ContentSection = styled.div`
   display: flex;
   flex-direction: column;
-  // align-items: start;
   align-items: center;
   justify-content: center;
   flex: 1;
 
   width: 50%;
-  margin: 1em;
 
-  // padding: 0.5em;
+  margin: 1em;
 `;
 
-const RightSection = styled.div`
+const ImageSection = styled.div`
   display: flex;
-  // justify-content: center;
   align-items: flex-end;
-  // flex: 1;
   position: relative;
 
   width: 50%;
   margin: 1em;
-  // height: 100vh; /* Ensure full page height */
-
-  // background-color: grey;
-
-  // padding: 1em;
 `;
 
 const ContentBlock = styled.div`
-  /* Center content both horizontally and vertically */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: start; /* Optional: Ensures text is also centered */
-
-  // min-height: 80vh;
+  text-align: start; 
 
   border-radius: 10px;
   font-size: 18px;
-
   background: white;
-  // padding: 20px;
 `;
 
+const HeaderText = styled.h2`
+  font-size: 48px;
+  font-weight: 600;
 
+  color:black;
+`;
+
+const SmallText = styled.h5`
+  z-index: 10;
+
+  font-weight: 500;
+  font-size: 24px;
+
+  color:black;
+
+  margin: 0;
+  margin-top: 1em;
+`;
 
 const Image = styled.img`
   width: 90%;
@@ -118,25 +93,7 @@ const Image = styled.img`
 `;
 
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
 
-`;
-
-const AnnoucementContainer = styled.div`
-  padding: 2em;
-  height: 70vh;
-  background: radial-gradient(circle at top, #111e40 10%, #0a0027 50%, #050017 100%);
-`;
-
-const FunctionContainer = styled.div`
-  display:flex;
-  flex-direction: row;
-  width: 100%;
-  height: 200vh;
-  margin-top: 0.5em;
-`;
 
 const StartButton = styled(NavLink)`
   display: flex;
@@ -145,12 +102,6 @@ const StartButton = styled(NavLink)`
   border-radius: 5px;
 
   text-decoration: none;
-  // text-transform: uppercase;
-  // font-weight: bold;
-
-  // background: #007dfc;
-  // background: #3cc9b4;
-  // background: #5f30e2;
   color: black;
   border: 1px solid black;
 
@@ -168,17 +119,17 @@ const StartButton = styled(NavLink)`
 
 const Home = () => {
   return (
-    <Container>
+    <HomeContainer>
       <AnnoucementContainer>
         <AnnouncementMarquee message="📢 Struggling with Job Applications? Get instant feedback & improve your resume today! 🚀"/>
         <AnnouncementBoard/>
       </AnnoucementContainer>
-      <CardContainer>
-          <RightSection>
-            <Image src={appPic1} alt=""  />
-          </RightSection>
 
-          <LeftSection>
+      <CardContainer>
+          <ImageSection>
+            <Image src={appPic1} alt=""  />
+          </ImageSection>
+          <ContentSection>
             <ContentBlock>
               <HeaderText>Optimize Your Resume & Get More Interviews!</HeaderText>
               <SmallText>Our AI -powered tool analyzes your resume and provides instant feedback to help you stand out in job applications.</SmallText>
@@ -186,11 +137,11 @@ const Home = () => {
             <StartButton to="/resumeanalyzer">
               Start Now to Optimize Your Resume!
             </StartButton>
-          </LeftSection>
+          </ContentSection>
       </CardContainer>  
 
       <CardContainer>
-          <LeftSection>
+          <ContentSection>
             <ContentBlock>
               <HeaderText>Perfect Your Resume: Fix Grammar & Spelling Instantly!</HeaderText>
               <SmallText>Our AI-powered grammar and spelling check ensures your resume is polished, professional, and error-free. </SmallText>
@@ -198,19 +149,18 @@ const Home = () => {
             <StartButton to="/grammarchecker">
               Check Your Spelling and Grammar for Free!
             </StartButton>
-          </LeftSection>
+          </ContentSection>
 
-          <RightSection>
+          <ImageSection>
             <Image src={appPic2} alt=""  />
-          </RightSection>
+          </ImageSection>
       </CardContainer>  
 
       <CardContainer>
-          <RightSection>
+          <ImageSection>
             <Image src={appPic3} alt=""  />
-          </RightSection>
-
-          <LeftSection>
+          </ImageSection>
+          <ContentSection>
             <ContentBlock>
               <HeaderText>Get Your Career Advice from AI!</HeaderText>
               <SmallText>Our AI Chatbot can give you any advice or suggestion on your career to help with your job seeking.</SmallText>
@@ -218,13 +168,11 @@ const Home = () => {
             <StartButton to="/aichatbot">
               Chat with AI for Career Advices!
             </StartButton>
-          </LeftSection>
+          </ContentSection>
       </CardContainer>  
 
-
-      
-    </Container>
+    </HomeContainer>
   )
 }
 
-export default Home
+export default Home;

@@ -5,52 +5,63 @@ import avatarPic from "../assets/avatar.png"
 const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
+
   height: 90vh;
   width: 100%;
   box-sizing: border-box;
+
   background-color: white;
+
   padding: 20px 50px;
 `;
 
 const MessagesContainer = styled.div`
-  flex-grow: 1;
-  // overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  flex-grow: 1;
+
+  gap: 8px; /* Gap between Item in Container*/ 
   padding: 20px;
 `;
 
 const MessageBoxContainer = styled.div`
-  max-width: 60%;
   display: flex;
   align-items: flex-end;
-  gap: 8px;
   align-self: ${(props) => (props.isUser ? 'flex-end' : 'flex-start')};
+
+  max-width: 60%;
+  
+  gap: 8px;
   margin-bottom: 1em;
 `;
 
 const Message = styled.div`
+  position: relative;
+  align-self: ${(props) => (props.isUser ? 'flex-end' : 'flex-start')};
+  text-align: start;
+
   max-width: 50%;
   min-width: fit-content;
-  padding: 10px;
+
   border-radius: 10px;
-  font-size: 20px;
-  line-height: 1.8;
-  text-align: start;
-  word-wrap: break-word;
-  white-space: pre-wrap;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   color: ${(props) => (props.isUser ? 'white' : 'black')};
   background-color: ${(props) => (props.isUser ? '#007BFF' : 'white')};
-  align-self: ${(props) => (props.isUser ? 'flex-end' : 'flex-start')};
-  position: relative;
+  
+  font-size: 20px;
+  line-height: 1.8;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+
+  padding: 10px;
 `;
 
 const Avatar = styled.img`
   width: 60px;
   height: 60px;
+
   border-radius: 50%;
+
   margin-right: ${(props) => (props.isUser ? '0' : '8px')};
   margin-left: ${(props) => (props.isUser ? '8px' : '0')};
 `;
@@ -58,28 +69,33 @@ const Avatar = styled.img`
 const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px;
+  position: sticky; /* Keeps input fixed at bottom */
+  bottom: 0;
+  
   background: white;
   border-top: 1px solid #ddd;
-  position: sticky; /* Keeps input fixed at bottom */
-  padding: 20px;
-  bottom: 0;
+  
+  padding: 1em;
 `;
 
 const Textarea = styled.textarea`
+  min-height: 20px;
+  max-height: 150px;
+  height: 40px;
   flex-grow: 1;
-  padding: 10px;
+
   border: none;
   border-radius: 20px;
+  background: #f0f0f0;
+
   font-size: 20px;
   font-family: 'Lato', sans-serif;
   outline: none;
-  background: #f0f0f0;
   resize: none;
-  height: 40px;
-  min-height: 20px;
-  max-height: 150px;
+  
   overflow-y: auto;
+
+  padding: 10px;
 
   &::placeholder {
     font-family: 'Lato', sans-serif;
@@ -89,25 +105,28 @@ const Textarea = styled.textarea`
 `;
 
 const SendButton = styled.button`
-  margin-left: 8px;
-  padding: 10px;
   background: none;
   border: none;
   font-size: 18px;
   cursor: pointer;
+
+  margin-left: 8px;
+  padding: 10px;
 `;
 
 const PageTitle = styled.h1`
   font-size: 24px;
   font-weight: bold;
-  margin: 1em;
   color: #333;
+
+  margin: 1em;
 `;
 
 const TypingIndicator = styled.div`
-  font-size: 18px;
   color: #888;
+  font-size: 18px;
   font-style: italic;
+
   margin-left: 8px;
 `;
 
@@ -117,10 +136,28 @@ const AIChatbot = () => {
   ]);
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
+
   const ws = useRef(null);
   const messagesEndRef = useRef(null); // Ref for scrolling to bottom
+
   const API_URL = "https://resume-analyzer-genai-fastapi.onrender.com/httpchat";
 
+
+  // Scroll to bottom whenever messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [typing]);
+
+  // Handle send message when enter is pressed
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      // sendMessage();
+      sendMessageHttp();
+    }
+  };
+
+  // WEBSOCKET METHOD
   // useEffect(() => {
   //   ws.current = new WebSocket('ws://localhost:8000/chat');
 
@@ -136,32 +173,20 @@ const AIChatbot = () => {
   //   return () => ws.current.close();
   // }, []);
 
-  // Scroll to bottom whenever messages change
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [typing]);
+  // const sendMessage = () => {
+  //   if (input.trim()) {
+  //     const userMessage = { text: input, isUser: true };
+  //     setMessages((prev) => [...prev, userMessage]);
+  //     // Ensure scrolling happens after state updates
+  //     setTimeout(() => {
+  //       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  //     }, 100);
+  //     ws.current.send(input);
+  //     setInput('');
+  //   }
+  // };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      // sendMessage();
-      sendMessageHttp();
-    }
-  };
-
-  const sendMessage = () => {
-    if (input.trim()) {
-      const userMessage = { text: input, isUser: true };
-      setMessages((prev) => [...prev, userMessage]);
-      // Ensure scrolling happens after state updates
-      setTimeout(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-      ws.current.send(input);
-      setInput('');
-    }
-  };
-
+  // REST API METHOD Sending Message to Chatbot
   const sendMessageHttp = async () => {
     if (input.trim()) {
       const userMessage = { text: input, isUser: true };
@@ -192,9 +217,13 @@ const AIChatbot = () => {
     }
   };
 
+
+
   return (
     <ChatContainer>
       <PageTitle>Your AI Career Advisor</PageTitle>
+
+
       <MessagesContainer>
         {messages.map((msg, index) => (
           <MessageBoxContainer key={index} isUser={msg.isUser}>
@@ -211,6 +240,8 @@ const AIChatbot = () => {
         {/* Empty div to keep the scroll at the bottom */}
         <div ref={messagesEndRef} />
       </MessagesContainer>
+
+
       <InputContainer>
         <Textarea
           value={input}
@@ -219,8 +250,8 @@ const AIChatbot = () => {
           onKeyDown={handleKeyDown}
         />
         <SendButton onClick={sendMessageHttp}>📩</SendButton>
-        
       </InputContainer>
+
     </ChatContainer>
   );
 };

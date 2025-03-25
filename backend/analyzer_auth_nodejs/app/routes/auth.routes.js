@@ -1,6 +1,7 @@
 const { verifySignUp } = require("../middlewares");
 const controller = require("../controllers/auth.controller");
 
+// Path Setup, HTTP METHOD + VERIFICATION + FUNCTIONS
 module.exports = function(app) {
   app.use(function(req, res, next) {
     res.header(

@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { AccountBox } from '../components/AuthComponent/AccountBox';
 import loginBg from "../assets/background.gif";
 
-const StyledDiv = styled.div`
-  height: 2400px
-`;
 
 const LoginContainer = styled.div`
   display: flex;

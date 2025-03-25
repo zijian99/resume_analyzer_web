@@ -1,34 +1,22 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import styled from 'styled-components'
-import Footer from '../../components/Footer';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+
 import NavbarMain from '../../components/NavbarComponent/NavbarMain';
- 
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-//    height: 100vh;
-`;
-
-const MainContent = styled.div`
-  // flex: 1;
-  padding-top: 8vh ; /* Should match or be slightly larger than navbar height */
-`;
+import {
+  LayoutContainer,
+  MainContent,
+} from '../PageLayout/LayoutStyles';
 
 
 const LayoutMain = () => {
 
   return (
-    <Container>
+    <LayoutContainer>
         <NavbarMain />
         <MainContent>
             <Outlet />
         </MainContent>
-        
-
-    </Container>
+    </LayoutContainer>
   );
 };
 

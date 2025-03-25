@@ -1,6 +1,8 @@
 const { authJwt } = require("../middlewares");
 const controller = require("../controllers/user.controller");
 
+
+// FOR TESTING PURPOSE(NOT IN USE)
 module.exports = function(app) {
   app.use(function(req, res, next) {
     res.header(

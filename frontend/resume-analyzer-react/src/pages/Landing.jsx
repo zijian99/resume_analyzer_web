@@ -23,38 +23,16 @@ import { AiOutlineDownload } from "react-icons/ai";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  // flex: 1; /* Takes up remaining height after navbar */
-
   width: 100%;
-  // overflow-y: auto;
-  // scroll-behavior: smooth;
+
 `;
 
 const CardContainer = styled.div`
   display: flex;
-  // align-items: center;
   flex-direction: row;
   justify-content: space-between;
 
-  // min-height: 100vh; /* Each section takes full viewport height */
-
-  // background-color: purple;
-
-  // margin-bottom: 0.5em;
   padding: 2em 5em;
-`;
-
-const CardContainer1 = styled.div`
-  display: flex;
-  // align-items: center;
-  // justify-content: center;
-
-  min-height: 100vh; /* Each section takes full viewport height */
-  width: 100%;
-
-  background-color: red;
-
-  margin-bottom: 0.5em 0;
 `;
 
 const HeaderContainer = styled.div`
@@ -69,49 +47,31 @@ const HeaderContainer = styled.div`
 
 const PricingContainer = styled.div`
   display: flex;
-  // align-items: center;
   flex-direction: column;
   justify-content: space-between;
 
-  // min-height: 100vh; /* Each section takes full viewport height */
-
-  // background-color: purple;
-
-  // margin-bottom: 0.5em;
   margin: 10em 0;
-  // padding: 5em 5em;
-
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  // align-items: center;
-  // justify-content: center;
-
 `;
 
 
 const HeaderText = styled.h2`
-  // z-index: 10;
-
   font-size: 48px;
   font-weight: 600;
-  // line-height: 1.24;
 
-  // color: #fff; 
   color:black;
-
-  // margin-bottom: 1em;
 `;
 
 const SmallText = styled.h5`
-    z-index: 10;
+  z-index: 10;
 
   font-weight: 500;
   font-size: 24px;
-
-  // color: #fff;
+  
   color:black;
 
   margin: 0;
@@ -191,25 +151,17 @@ const GetAccountText = styled.div`
 const LeftSection = styled.div`
   display: flex;
   flex-direction: column;
-  // align-items: start;
   flex: 1;
 
   width: 50%;
-
-  // padding: 0.5em;
 `;
 
 const RightSection = styled.div`
   display: flex;
-  // justify-content: center;
   align-items: flex-end;
-  // flex: 1;
   position: relative;
 
   width: 50%;
-  // height: 100vh; /* Ensure full page height */
-
-  // background-color: grey;
 
   padding: 1em;
 `;
@@ -228,7 +180,6 @@ const ContentBlock = styled.div`
   font-size: 18px;
 
   background: white;
-  // padding: 20px;
 `;
 
 const StickyImageWrapper = styled.div`
@@ -239,7 +190,6 @@ const StickyImageWrapper = styled.div`
   position: sticky;
 
   top: 20%; /* Adjust based on navbar if needed */
-  // width: 50%;
   width: 100%;
 
   margin-top: 10%;
@@ -266,8 +216,6 @@ const PricingTitle = styled.div`
 
   font-size: 3em;
   font-weight: bold;
-
-  // background-color:grey;
 `;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,9 +232,7 @@ const Landing = () => {
   const [currentImage, setCurrentImage] = useState(sections[0].image);
   const [isFading, setIsFading] = useState(false);
   const sectionRefs = useRef([]);
-  // const { ref: firstContainerRef, inView: firstIsInView } = useInView({ threshold: 0.8 });
-  // const { ref: secondContainerRef, inView: secondIsInView } = useInView({ threshold: 0.8 });
-  // const { ref: thirdContainerRef, inView: thirdIsInView } = useInView({ threshold: 0.8 });
+
 
   // Manually checking if current ContentBlock is in View, we changed the images based on each content
   useEffect(() => {
@@ -322,7 +268,6 @@ const Landing = () => {
 
   return (
     <Wrapper>
-
         {/* FIRST PART OF LANDING PAGE */}
         <CardContainer>
           <HeaderContainer>

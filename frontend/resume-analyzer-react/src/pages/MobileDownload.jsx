@@ -5,14 +5,16 @@ import profilePic from "../assets/logo_example/logoex7.jpg"; // Replace with pro
 import qrCode from "../assets/bmc_qr.png"; // Replace with QR code image
 
 const PageContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: url(${bgImage}) no-repeat center center/cover;
+
+  width: 100vw;
+  height: 100vh;
   position: relative;
+  
+  background: url(${bgImage}) no-repeat center center/cover;
   
   &::before {
     content: "";
@@ -26,8 +28,10 @@ const PageContainer = styled.div`
 const ContentBox = styled.div`
   position: relative;
   max-width: 500px;
-  padding: 2rem;
+  
   color: white;
+
+  padding: 2rem;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -53,16 +57,20 @@ const ButtonContainer = styled.div`
 
 const StyledButton = styled.a`
   flex: 1;
-  padding: 0.8rem 0;
+  text-align: center;
+  
   font-size: 1rem;
   font-weight: bold;
   color: white;
   text-decoration: none;
+
   border-radius: 20px;
   background: rgba(255, 255, 255, 0);
   border: 1px solid white;
-  text-align: center;
+  
   transition: 0.3s ease-in-out;
+
+  padding: 0.8rem 0;
 
   &:hover {
     background: rgba(255, 255, 255, 0.4);
@@ -81,24 +89,20 @@ const Footer = styled.div`
   margin-top: 1rem;
 `;
 
-/* Hide elements for mobile */
 const ProfileImage = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-bottom: 1rem;
   border: 2px solid white;
-
-//   @media (max-width: 768px) {
-//     display: none; /* Hide profile picture on mobile */
-//   }
+  margin-bottom: 1rem;
 `;
 
 const Description = styled.p`
   font-size: 0.9rem;
-  margin-bottom: 1rem;
   opacity: 0.9;
   line-height: 2;
+
+  margin-bottom: 1rem;
 
   @media (max-width: 768px) {
     display: none; /* Hide description on mobile */

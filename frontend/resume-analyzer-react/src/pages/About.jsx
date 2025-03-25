@@ -4,97 +4,84 @@ import { FaGithub, FaLinkedin } from "react-icons/fa"; // Import icons
 import TechStack from "../components/TechStack";
 
 const AboutContainer = styled.div`
-  background-color: #fff;
-  display:flex;
+  display: flex;
   flex-direction: column; 
   justify-content: space-between;
+  
+  background-color: #fff;
   color: #333;
   font-family: Arial, sans-serif;
+  
   padding: 2em 8em;
-  // max-width: 900px;
-  // margin: auto;
 `;
 
 const SectionContainer = styled.div`
-  background-color: #fff;
-  display:flex;
+  display: flex;
   flex-direction: column; 
   justify-content: space-between;
+
+  background-color: #fff;
   color: #333;
   font-family: Arial, sans-serif;
-  margin-bottom: 8em;
-  // max-width: 900px;
-  // margin: auto;
-`;
 
+  margin-bottom: 8em;
+`;
 
 const Title = styled.h1`
   font-size: 36px;
   font-weight: bold;
-  margin-bottom: 1.5em;
+  
   border-left: 4px solid #4a90e2;
+  
+  margin-bottom: 1.5em;
   padding-left: 10px;
 `;
 
 const Text = styled.p`
   font-size: 20px;
   line-height: 1.6;
-  margin-bottom: 20px;
   white-space: normal;  /* Preserves new lines */
   word-wrap: break-word;
+
+  margin-bottom: 1.5em;
 `;
 
-const GameIconsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-`;
-
-const GameIcon = styled.img`
-  width: 60px;
-  height: 60px;
-  margin: 0 15px;
-  border-radius: 10px;
-`;
 
 const DeveloperCard = styled.div`
-  background: #f9f9f9;
-  padding: 2em;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 20%;
-  margin-top: 20px;
-`;
 
-const ProfileImage = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 15px;
-  border: 3px solid #4a90e2;
+  width: 20%;
+
+  background: #f9f9f9;
+  
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  
+  padding: 2em;
+  margin-top: 20px;
 `;
 
 const DeveloperName = styled.h2`
   font-size: 24px;
   font-weight: bold;
+
   margin-bottom: 5px;
 `;
 
 const SocialLinks = styled.div`
-  // display: flex;
-  // justify-content: center;
   margin: 0 1em ;
-  margin-top: 15px;
+  margin-top: 1em;
 `;
 
 const SocialIcon = styled.a`
-  margin: 0 10px;
+  
   color:rgb(2, 2, 2);
   font-size: 28px;
   transition: color 0.3s ease;
+
+  margin: 0 10px;
 
   &:hover {
     color: #2c6dbc;
@@ -102,9 +89,10 @@ const SocialIcon = styled.a`
 `;
 
 const DisclaimerText = styled.p`
-  font-size: 16px;
   color: #ff4d4d; /* Red text */
+  font-size: 16px;
   font-weight: bold;
+
   margin-top: 15px;
 `;
 
@@ -150,9 +138,6 @@ const About = () => {
             </SocialIcon>
           </SocialLinks>
         </DeveloperCard>
-
-        
-
       </SectionContainer>
 
       <TechStack/>

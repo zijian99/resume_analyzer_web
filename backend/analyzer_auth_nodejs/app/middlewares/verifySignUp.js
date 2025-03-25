@@ -1,7 +1,10 @@
+// Imports
 const db = require("../models");
 const ROLES = db.ROLES;
 const User = db.user;
 
+
+// Check if there is an existing username/email inside the MongoDB
 const checkDuplicateUsernameOrEmail = async (req, res, next) => {
   try {
     // Check if username exists
@@ -22,6 +25,8 @@ const checkDuplicateUsernameOrEmail = async (req, res, next) => {
   }
 };
 
+
+// Check if the role exist in MongoDB
 const checkRolesExisted = (req, res, next) => {
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
@@ -35,9 +40,11 @@ const checkRolesExisted = (req, res, next) => {
   next();
 };
 
+// Pack functions 
 const verifySignUp = {
   checkDuplicateUsernameOrEmail,
   checkRolesExisted
 };
 
+// Exports
 module.exports = verifySignUp;

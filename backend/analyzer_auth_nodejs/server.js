@@ -1,9 +1,10 @@
+// Import required module
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
+// Setup application
 const app = express();
-
 
 // Change the origin here to our frontend website url so that only API call from there is accepted when deployment if required
 var corsOptions = {
@@ -16,10 +17,11 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Setup DB
 const db = require("./app/models");
 const Role = db.role;
 
-console.log(process.env.MONGO_URI)
+// console.log(process.env.MONGO_URI)
 
 db.mongoose
   .connect(process.env.MONGO_URI, {
@@ -35,7 +37,9 @@ db.mongoose
     process.exit();
   });
 
-// Simple route
+
+
+// Root path to show that application is working
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the application." });
 });
@@ -50,7 +54,10 @@ app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}.`);
 });
 
-// Async function to initialize roles
+
+
+
+// Async function to initialize roles(Run ONCE)
 // async function initial() {
 //   try {
 //     const count = await Role.estimatedDocumentCount(); // No callback
